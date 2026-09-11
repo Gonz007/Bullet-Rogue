@@ -39,12 +39,12 @@ static func line(source: Node2D, projectile_scene: PackedScene, count: int, spac
 		_spawn(source, projectile_scene, direction, speed, damage, true, source.global_position + perpendicular * offset)
 
 
-static func wall(source: Node2D, projectile_scene: PackedScene, count: int, spacing: float, speed: float, gap_index: int = -1) -> void:
+static func wall(source: Node2D, projectile_scene: PackedScene, count: int, spacing: float, speed: float, gap_index: int = -1, heavy: bool = false) -> void:
 	for index in count:
 		if index == gap_index:
 			continue
 		var offset := (float(index) - float(count - 1) * 0.5) * spacing
-		_spawn(source, projectile_scene, Vector2.DOWN, speed, 1, true, source.global_position + Vector2(offset, 0.0))
+		_spawn(source, projectile_scene, Vector2.DOWN, speed, 1, not heavy, source.global_position + Vector2(offset, 0.0))
 
 
 static func cross(source: Node2D, projectile_scene: PackedScene, speed: float, damage: int = 1) -> void:
@@ -68,8 +68,8 @@ static func diamond(source: Node2D, projectile_scene: PackedScene, speed: float)
 		_spawn(source, projectile_scene, Vector2.UP.rotated(angle + PI * 0.25), speed, 1)
 
 
-static func tunnel(source: Node2D, projectile_scene: PackedScene, speed: float, opening_side: int) -> void:
-	wall(source, projectile_scene, 9, 52.0, speed, clampi(opening_side, 0, 8))
+static func tunnel(source: Node2D, projectile_scene: PackedScene, speed: float, opening_side: int, heavy: bool = false) -> void:
+	wall(source, projectile_scene, 9, 52.0, speed, clampi(opening_side, 0, 8), heavy)
 
 
 static func rotating_ring(source: Node2D, projectile_scene: PackedScene, count: int, speed: float, angle: float) -> void:
@@ -85,5 +85,5 @@ static func _spawn(source: Node2D, projectile_scene: PackedScene, direction: Vec
 	projectile.global_position = source.global_position if position_override == Vector2.INF else position_override
 	source.get_tree().current_scene.add_child(projectile)
 	projectile.configure(Projectile.Team.ENEMY, direction, damage, speed, source)
-	projectile.can_be_reflected = reflectable
+	projectile.set_reflectable(reflectable)
 	projectile.metadata["pattern_bullet"] = true

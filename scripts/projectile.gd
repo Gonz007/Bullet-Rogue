@@ -43,6 +43,11 @@ func configure(new_team: Team, new_direction: Vector2, new_damage: int, new_spee
 	_update_visuals()
 
 
+func set_reflectable(value: bool) -> void:
+	can_be_reflected = value
+	_update_visuals()
+
+
 func _process(delta: float) -> void:
 	if metadata.get("rocket", false):
 		var targets := get_tree().get_nodes_in_group("enemies")
@@ -116,4 +121,9 @@ func _apply_collision_profile() -> void:
 
 
 func _update_visuals() -> void:
-	$Visual.color = Color(0.35, 0.95, 1.0) if team == Team.PLAYER and metadata.get("reflected", false) else (Color(1.0, 0.9, 0.25) if team == Team.PLAYER else Color(1.0, 0.3, 0.35))
+	if team == Team.PLAYER:
+		$Visual.color = Color(0.35, 0.95, 1.0) if metadata.get("reflected", false) else Color(1.0, 0.9, 0.25)
+		$Visual.scale = Vector2.ONE
+	else:
+		$Visual.color = Color(1.0, 0.28, 0.78) if not can_be_reflected else Color(1.0, 0.3, 0.35)
+		$Visual.scale = Vector2.ONE * (1.7 if not can_be_reflected else 1.0)

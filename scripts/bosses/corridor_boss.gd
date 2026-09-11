@@ -32,12 +32,12 @@ func _attack() -> void:
 	match current_phase:
 		1:
 			if _attack_index % 2 == 0:
-				BulletPatterns.wall(self, projectile_scene, 9, 52.0, 165.0, int(_attack_index / 2) % 9)
+				BulletPatterns.wall(self, projectile_scene, 9, 52.0, 165.0, int(_attack_index / 2) % 9, true)
 			else:
 				BulletPatterns.line(self, projectile_scene, 5, 26.0, (target - global_position).normalized(), 245.0)
 		2:
 			if _attack_index % 2 == 0:
-				BulletPatterns.tunnel(self, projectile_scene, 185.0, (_attack_index * 2) % 9)
+				BulletPatterns.tunnel(self, projectile_scene, 185.0, (_attack_index * 2) % 9, true)
 			else:
 				BulletPatterns.cross(self, projectile_scene, 185.0)
 				BulletPatterns.fan(self, projectile_scene, 3, 0.42, target, 260.0)
