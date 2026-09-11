@@ -25,6 +25,7 @@ var _stage: StageData
 
 
 func _ready() -> void:
+	AudioManager.play_music("gameplay")
 	_apply_selected_stage()
 	_create_starfield()
 	player.health_changed.connect(_on_player_health_changed)

@@ -24,6 +24,7 @@ func start_boss(boss_scene: PackedScene) -> bool:
 	active_boss.defeated.connect(_on_boss_defeated)
 	is_boss_active = true
 	AudioManager.play_sfx("boss_warning")
+	AudioManager.play_music("boss")
 	boss_started.emit(active_boss)
 	boss_health_changed.emit(active_boss.health, active_boss.max_health)
 	boss_phase_changed.emit(active_boss.current_phase, active_boss.phase_count)
@@ -45,4 +46,5 @@ func _stop_director_and_clear_arena() -> void:
 func _on_boss_defeated(boss: Boss, _damage_info: DamageInfo) -> void:
 	is_boss_active = false
 	AudioManager.play_sfx("boss_death")
+	AudioManager.play_music("gameplay")
 	boss_defeated.emit(boss.boss_id)

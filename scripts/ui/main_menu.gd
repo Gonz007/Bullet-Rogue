@@ -1,6 +1,7 @@
 extends Control
 
 func _ready() -> void:
+	AudioManager.play_music("menu")
 	$Center/Layout/Play.pressed.connect(func() -> void: $StageSelect.open())
 	$Center/Layout/Cards.pressed.connect(func() -> void: $Collection.show())
 	$Center/Layout/Hangar.pressed.connect(func() -> void: $Hangar.visible = true)
