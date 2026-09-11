@@ -85,7 +85,7 @@ func _create_starfield() -> void:
 		var size := random.randf_range(1.0, 2.8)
 		star.polygon = PackedVector2Array([Vector2(-size, 0), Vector2(0, -size), Vector2(size, 0), Vector2(0, size)])
 		star.position = Vector2(random.randf_range(0.0, 480.0), random.randf_range(-20.0, 880.0))
-		star.color = Color(0.28, 0.45, 0.75, random.randf_range(0.35, 0.9))
+		star.color = Color(0.2, 0.78, 0.73, random.randf_range(0.18, 0.52))
 		$ScrollLayer/Starfield.add_child(star)
 		stars.append(star)
 

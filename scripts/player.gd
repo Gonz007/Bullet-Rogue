@@ -23,6 +23,7 @@ var _dash_direction := 0.0
 var _dash_distance_remaining := 0.0
 var _parry_time_remaining := 0.0
 var _last_tap_time := {"move_left": -1.0, "move_right": -1.0}
+var _parry_hit_stop_id := 0
 
 
 func _ready() -> void:
@@ -36,6 +37,10 @@ func _apply_equipped_skin() -> void:
 	var skin := SkinManager.get_equipped_skin()
 	$Body.color = skin.ship_color
 	$Cockpit.color = skin.cockpit_color
+	# The original polygons remain as collision-independent compatibility nodes;
+	# the new visual rig is intentionally not recoloured by cosmetic gameplay skins.
+	$Body.visible = false
+	$Cockpit.visible = false
 
 
 func _physics_process(delta: float) -> void:
@@ -111,6 +116,7 @@ func take_damage(amount: int) -> void:
 	health = max(health - amount, 0)
 	health_changed.emit(health, max_health)
 	AudioManager.play_sfx("player_hit")
+	$VisualRig.play_hit()
 	if health == 0:
 		is_dead = true
 		$Weapon.set_active(false)
@@ -123,7 +129,26 @@ func _on_parry_area_entered(area: Area2D) -> void:
 		return
 	area.reflect(Vector2.UP, reflected_projectile_speed, self)
 	if area is Projectile and area.team == Projectile.Team.PLAYER:
+		$VisualRig.play_parry()
+		_play_successful_parry_hit_stop()
 		projectile_parried.emit(area)
+
+
+func play_shot_feedback() -> void:
+	$VisualRig.play_shot_feedback()
+
+
+func _play_successful_parry_hit_stop() -> void:
+	# This is intentionally short and ignores time scale so controls never become
+	# sluggish; it is visual impact only, not a balance-affecting pause.
+	_parry_hit_stop_id += 1
+	var current_id := _parry_hit_stop_id
+	Engine.time_scale = 0.12
+	var timer := get_tree().create_timer(0.035, true, false, true)
+	timer.timeout.connect(func() -> void:
+		if current_id == _parry_hit_stop_id:
+			Engine.time_scale = 1.0
+	)
 
 
 func _draw() -> void:

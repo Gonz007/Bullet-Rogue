@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/Projectile.tscn" id="2_projectile"]
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="3_weapon"]
+[ext_resource type="Texture2D" path="res://assets/ships/steampunk_alien_plane_v1.png" id="4_plane"]
+[ext_resource type="Script" path="res://scripts/visual/player_steam_visual.gd" id="5_visual"]
 
 [sub_resource type="RectangleShape2D" id="1_shape"]
 size = Vector2(34, 46)
@@ -15,10 +17,12 @@ script = ExtResource("1_player")
 projectile_scene = ExtResource("2_projectile")
 
 [node name="Body" type="Polygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(0, -28, 19, 20, 0, 14, -19, 20)
 color = Color(0.22, 0.78, 1, 1)
 
 [node name="Cockpit" type="Polygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(0, -16, 8, 7, 0, 12, -8, 7)
 color = Color(0.85, 0.96, 1, 1)
 
@@ -40,3 +44,11 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ParryArea"]
 shape = SubResource("2_parry_shape")
+
+[node name="VisualRig" type="Node2D" parent="."]
+z_index = 2
+script = ExtResource("5_visual")
+
+[node name="PlaneSprite" type="Sprite2D" parent="VisualRig"]
+texture = ExtResource("4_plane")
+scale = Vector2(0.055, 0.055)

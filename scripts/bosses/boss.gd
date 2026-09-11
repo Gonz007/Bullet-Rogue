@@ -35,4 +35,4 @@ func take_damage(damage_info: DamageInfo) -> void:
 		defeated.emit(self, damage_info)
 		died.emit(self, damage_info)
 		CombatEffect.spawn(get_tree().current_scene, global_position, Color(0.4, 0.95, 1.0), 96.0)
-		queue_free()
+		_play_death_visual()

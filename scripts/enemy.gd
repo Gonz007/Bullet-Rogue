@@ -24,6 +24,9 @@ func _ready() -> void:
 	health = max_health
 	add_to_group("enemies")
 	body_entered.connect(_on_body_entered)
+	var visual := OrganicEnemyVisual.new()
+	visual.name = "OrganicMachineAccent"
+	add_child(visual)
 
 
 func take_damage(damage_info: DamageInfo) -> void:
@@ -40,7 +43,7 @@ func take_damage(damage_info: DamageInfo) -> void:
 		CombatEffect.spawn(get_tree().current_scene, global_position, color, 32.0)
 		AudioManager.play_sfx("enemy_kill")
 		get_tree().call_group("screen_shake", "shake", 2.0, 0.07)
-		queue_free()
+		_play_death_visual()
 
 
 func leave_arena_if_needed() -> void:
@@ -75,9 +78,25 @@ func apply_elite() -> void:
 
 
 func _flash_hit(reflected: bool) -> void:
+	var visual := get_node_or_null("OrganicMachineAccent") as OrganicEnemyVisual
+	if visual != null:
+		visual.pulse_on_hit(reflected)
 	modulate = Color(0.4, 0.95, 1.0) if reflected else Color.WHITE
 	var tween := create_tween()
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+
+
+func _play_death_visual() -> void:
+	# Mark the dead target inert immediately, then allow a tiny visual breakdown.
+	collision_layer = 0
+	collision_mask = 0
+	monitoring = false
+	monitorable = false
+	var tween := create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(self, "scale", scale * 1.22, 0.14).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "modulate:a", 0.0, 0.14)
+	tween.chain().tween_callback(queue_free)
 
 
 func _try_drop_coins() -> void:
