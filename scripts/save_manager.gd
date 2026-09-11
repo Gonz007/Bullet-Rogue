@@ -111,6 +111,10 @@ func mark_synergy_discovered(synergy_id: String) -> void:
 	_append_unique("discovered_synergies", synergy_id)
 
 
+func is_synergy_discovered(synergy_id: String) -> bool:
+	return _data.get("discovered_synergies", []).has(synergy_id)
+
+
 func _append_unique(key: String, value: String) -> void:
 	var values: Array = _data.get(key, [])
 	if not values.has(value):

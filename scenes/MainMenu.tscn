@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/Hangar.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://scenes/ui/BossLab.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/ui/StageSelect.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/ui/Collection.tscn" id="7"]
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -87,4 +88,6 @@ visible = false
 [node name="BossLab" parent="." instance=ExtResource("5")]
 visible = false
 [node name="StageSelect" parent="." instance=ExtResource("6")]
+visible = false
+[node name="Collection" parent="." instance=ExtResource("7")]
 visible = false
