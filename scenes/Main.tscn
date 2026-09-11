@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/Rammer.tscn" id="27_rammer"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/StraightShooter.tscn" id="28_straight"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/SpreadShooter.tscn" id="29_spread"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/PredictiveChaser.tscn" id="30_predictive"]
 
 [node name="Main" type="Node2D" unique_id=827351479]
 script = ExtResource("1_main")
@@ -59,6 +60,7 @@ zigzag_chaser_scene = ExtResource("26_zigzag")
 rammer_scene = ExtResource("27_rammer")
 straight_shooter_scene = ExtResource("28_straight")
 spread_shooter_scene = ExtResource("29_spread")
+predictive_chaser_scene = ExtResource("30_predictive")
 
 [node name="RunProgress" type="Node" parent="." unique_id=319239813]
 script = ExtResource("8_progress")
