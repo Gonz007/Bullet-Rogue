@@ -117,6 +117,7 @@ func take_damage(amount: int) -> void:
 	health_changed.emit(health, max_health)
 	AudioManager.play_sfx("player_hit")
 	$VisualRig.play_hit()
+	get_tree().call_group("screen_shake", "shake", 4.0, 0.08)
 	if health == 0:
 		is_dead = true
 		$Weapon.set_active(false)

@@ -43,6 +43,10 @@ func play_hit() -> void:
 
 
 func _draw() -> void:
+	# The painted propellers retain their detail while these transparent blades give
+	# them a readable constant rotation even at the small in-game sprite size.
+	_draw_propeller(Vector2(-27.0, -7.0), _idle_time * 24.0)
+	_draw_propeller(Vector2(27.0, -7.0), -_idle_time * 24.0)
 	# Animated turquoise propulsion below the brass aircraft.
 	var flame := 17.0 + sin(_idle_time * 18.0) * 4.0
 	draw_colored_polygon(PackedVector2Array([Vector2(-7, 23), Vector2(0, 23 + flame), Vector2(7, 23)]), Color(0.12, 0.95, 0.9, 0.42))
@@ -57,3 +61,10 @@ func _draw() -> void:
 		var radius := lerpf(24.0, 62.0, progress)
 		draw_arc(Vector2.ZERO, radius, 0.0, TAU, 32, Color(0.22, 1.0, 0.9, _parry_pulse * 0.9), 2.5)
 		draw_circle(Vector2.ZERO, radius * 0.65, Color(0.1, 0.8, 0.75, _parry_pulse * 0.08))
+
+
+func _draw_propeller(center: Vector2, angle: float) -> void:
+	for blade in 3:
+		var direction := Vector2.from_angle(angle + blade * TAU / 3.0)
+		draw_line(center - direction * 2.0, center + direction * 12.0, Color(0.3, 0.9, 0.88, 0.36), 2.0, true)
+	draw_circle(center, 3.0, Color(1.0, 0.62, 0.2, 0.92))
