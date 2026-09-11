@@ -4,6 +4,7 @@ extends Node
 var started_at := 0
 var kills := 0
 var boss_id := ""
+var coins_collected := 0
 
 
 func _ready() -> void:
@@ -13,6 +14,10 @@ func _ready() -> void:
 
 func register_kill(_enemy: Enemy) -> void:
 	kills += 1
+
+
+func register_coins(amount: int) -> void:
+	coins_collected += max(amount, 0)
 
 
 func elapsed_seconds() -> int:

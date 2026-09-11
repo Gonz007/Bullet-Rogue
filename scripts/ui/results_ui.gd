@@ -16,6 +16,6 @@ func _ready() -> void:
 
 func open_results(stats: RunStats, level: int, victory: bool, boss_id: String) -> void:
 	$Center/Panel/Layout/Title.text = "STAGE COMPLETE" if victory else "RUN OVER"
-	$Center/Panel/Layout/Summary.text = "TIME  %02d:%02d\nKILLS  %d\nLEVEL  %d\nBOSS  %s\nSYNERGIES  %d" % [stats.elapsed_seconds() / 60, stats.elapsed_seconds() % 60, stats.kills, level, boss_id.to_upper() if not boss_id.is_empty() else "NONE", SynergyManager.get_active_synergies().size()]
+	$Center/Panel/Layout/Summary.text = "TIME  %02d:%02d\nKILLS  %d\nLEVEL  %d\nSTAR COINS  %d\nBOSS  %s\nSYNERGIES  %d" % [stats.elapsed_seconds() / 60, stats.elapsed_seconds() % 60, stats.kills, level, stats.coins_collected, boss_id.to_upper() if not boss_id.is_empty() else "NONE", SynergyManager.get_active_synergies().size()]
 	visible = true
 	get_tree().paused = true

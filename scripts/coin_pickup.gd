@@ -28,6 +28,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	_collected = true
 	SaveManager.add_coins(amount)
+	get_tree().call_group("run_stats", "register_coins", amount)
 	CombatEffect.spawn(get_tree().current_scene, global_position, Color(1.0, 0.78, 0.2), 22.0)
 	AudioManager.play_sfx("coin_pickup")
 	queue_free()
