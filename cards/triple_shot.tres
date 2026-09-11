@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dulk0vhtv6dsu"]
+
+[ext_resource type="Script" uid="uid://cjuvsggsg6irn" path="res://scripts/cards/card_data.gd" id="1"]
+[ext_resource type="Script" uid="uid://bls425wifs867" path="res://scripts/cards/card_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Effect"]
+script = ExtResource("2")
+kind = 1
+
+[resource]
+script = ExtResource("1")
+id = "triple_shot"
+display_name = "Triple Shot"
+description = "Fire a three-way spread."
+rarity = 1
+tags = Array[String](["weapon", "multi_shot"])
+effect = SubResource("Effect")

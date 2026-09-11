@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c43dsle7lmmbt"]
+
+[ext_resource type="Script" uid="uid://cjuvsggsg6irn" path="res://scripts/cards/card_data.gd" id="1"]
+[ext_resource type="Script" uid="uid://bls425wifs867" path="res://scripts/cards/card_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Effect"]
+script = ExtResource("2")
+kind = 4
+
+[resource]
+script = ExtResource("1")
+id = "bounce"
+display_name = "Bounce"
+description = "Shots bounce once off side walls."
+rarity = 1
+tags = Array[String](["projectile", "bounce"])
+effect = SubResource("Effect")

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/turret.gd" id="1_turret"]
+[ext_resource type="PackedScene" path="res://scenes/Projectile.tscn" id="2_projectile"]
+
+[sub_resource type="CircleShape2D" id="1_shape"]
+radius = 24.0
+
+[node name="Turret" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_turret")
+projectile_scene = ExtResource("2_projectile")
+max_health = 8
+experience_value = 4
+
+[node name="Body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-28, -17, 28, -17, 22, 22, -22, 22)
+color = Color(0.2, 0.55, 0.95, 1)
+
+[node name="Barrel" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-7, 8, 7, 8, 7, 36, -7, 36)
+color = Color(0.65, 0.9, 1, 1)
+
+[node name="Core" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-9, -8, 9, -8, 9, 8, -9, 8)
+color = Color(0.9, 0.95, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_shape")

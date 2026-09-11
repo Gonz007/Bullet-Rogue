@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_shooter"]
+[ext_resource type="PackedScene" path="res://scenes/Projectile.tscn" id="2_projectile"]
+
+[sub_resource type="CircleShape2D" id="1_shape"]
+radius = 20.0
+
+[node name="Shooter" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_shooter")
+projectile_scene = ExtResource("2_projectile")
+max_health = 7
+experience_value = 3
+
+[node name="Body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-24, -13, 0, -27, 24, -13, 16, 22, -16, 22)
+color = Color(0.72, 0.3, 0.94, 1)
+
+[node name="Barrel" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-5, 4, 5, 4, 5, 30, -5, 30)
+color = Color(0.92, 0.72, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_shape")

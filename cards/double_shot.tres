@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://lu8otifya7y8"]
+
+[ext_resource type="Script" uid="uid://cjuvsggsg6irn" path="res://scripts/cards/card_data.gd" id="1"]
+[ext_resource type="Script" uid="uid://bls425wifs867" path="res://scripts/cards/card_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Effect"]
+script = ExtResource("2")
+
+[resource]
+script = ExtResource("1")
+id = "double_shot"
+display_name = "Double Shot"
+description = "Fire two parallel shots."
+tags = Array[String](["weapon", "multi_shot"])
+effect = SubResource("Effect")

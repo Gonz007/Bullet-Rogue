@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/burst.gd" id="1_burst"]
+[ext_resource type="PackedScene" path="res://scenes/Projectile.tscn" id="2_projectile"]
+
+[sub_resource type="CircleShape2D" id="1_shape"]
+radius = 22.0
+
+[node name="Burst" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_burst")
+projectile_scene = ExtResource("2_projectile")
+max_health = 9
+experience_value = 4
+
+[node name="Body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -30, 25, -10, 20, 24, 0, 30, -20, 24, -25, -10)
+color = Color(0.22, 0.72, 0.48, 1)
+
+[node name="Core" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -14, 11, 0, 0, 14, -11, 0)
+color = Color(0.9, 1, 0.45, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_shape")

@@ -1,0 +1,261 @@
+[gd_scene format=3 uid="uid://ddc6gib6mwqg6"]
+
+[ext_resource type="Script" uid="uid://dgy46pieuptsd" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://cn4ub7vxb5646" path="res://scripts/enemy_spawner.gd" id="3_spawner"]
+[ext_resource type="PackedScene" path="res://scenes/Chaser.tscn" id="4_chaser"]
+[ext_resource type="PackedScene" path="res://scenes/Shooter.tscn" id="5_shooter"]
+[ext_resource type="PackedScene" path="res://scenes/Burst.tscn" id="6_burst"]
+[ext_resource type="PackedScene" path="res://scenes/Turret.tscn" id="7_turret"]
+[ext_resource type="Script" uid="uid://34x1qginllf8" path="res://scripts/run_progress.gd" id="8_progress"]
+[ext_resource type="Script" uid="uid://74m3n16h4vuv" path="res://scripts/cards/card_manager.gd" id="9_cards"]
+[ext_resource type="Script" uid="uid://cjuvsggsg6irn" path="res://scripts/cards/card_data.gd" id="10_1iba3"]
+[ext_resource type="Script" uid="uid://d05d1blr6pou0" path="res://scripts/cards/card_slots_hud.gd" id="10_slots"]
+[ext_resource type="Resource" path="res://cards/double_shot.tres" id="11_double"]
+[ext_resource type="Resource" path="res://cards/pierce.tres" id="12_pierce"]
+[ext_resource type="Resource" path="res://cards/split.tres" id="13_split"]
+[ext_resource type="Resource" path="res://cards/combustion.tres" id="14_combustion"]
+[ext_resource type="Resource" path="res://cards/rocket.tres" id="15_rocket"]
+[ext_resource type="Resource" path="res://cards/triple_shot.tres" id="16_triple"]
+[ext_resource type="Resource" path="res://cards/bounce.tres" id="17_bounce"]
+[ext_resource type="Resource" path="res://cards/parry_reflector.tres" id="18_reflector"]
+[ext_resource type="Resource" path="res://cards/counter_shot.tres" id="19_counter"]
+[ext_resource type="Resource" path="res://cards/overload.tres" id="20_overload"]
+[ext_resource type="Script" path="res://scripts/shop/shop_manager.gd" id="21_shop_manager"]
+[ext_resource type="PackedScene" path="res://scenes/ui/ShopUI.tscn" id="22_shop_ui"]
+[ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="23_pause"]
+
+[node name="Main" type="Node2D" unique_id=827351479]
+script = ExtResource("1_main")
+
+[node name="Background" type="ColorRect" parent="." unique_id=72746173]
+offset_right = 480.0
+offset_bottom = 854.0
+mouse_filter = 2
+color = Color(0.025, 0.04, 0.1, 1)
+
+[node name="ScrollLayer" type="Node2D" parent="." unique_id=16692188]
+
+[node name="Starfield" type="Node2D" parent="ScrollLayer" unique_id=336372597]
+
+[node name="Player" parent="." unique_id=542985860 instance=ExtResource("2_player")]
+position = Vector2(240, 700)
+
+[node name="EnemySpawner" type="Node" parent="." unique_id=717987066]
+script = ExtResource("3_spawner")
+chaser_scene = ExtResource("4_chaser")
+shooter_scene = ExtResource("5_shooter")
+burst_scene = ExtResource("6_burst")
+turret_scene = ExtResource("7_turret")
+
+[node name="RunProgress" type="Node" parent="." unique_id=319239813]
+script = ExtResource("8_progress")
+
+[node name="CardManager" type="Node" parent="." unique_id=1537612501]
+script = ExtResource("9_cards")
+test_cards = Array[ExtResource("10_1iba3")]([ExtResource("11_double"), ExtResource("12_pierce"), ExtResource("13_split"), ExtResource("14_combustion"), ExtResource("15_rocket"), ExtResource("16_triple"), ExtResource("17_bounce"), ExtResource("18_reflector"), ExtResource("19_counter"), ExtResource("20_overload")])
+
+[node name="ShopManager" type="Node" parent="."]
+script = ExtResource("21_shop_manager")
+card_catalog = Array[ExtResource("10_1iba3")]([ExtResource("11_double"), ExtResource("12_pierce"), ExtResource("13_split"), ExtResource("14_combustion"), ExtResource("15_rocket"), ExtResource("16_triple"), ExtResource("17_bounce"), ExtResource("18_reflector"), ExtResource("19_counter"), ExtResource("20_overload")])
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1980825833]
+
+[node name="HealthLabel" type="Label" parent="HUD" unique_id=254296123]
+offset_left = 18.0
+offset_top = 18.0
+theme_override_colors/font_color = Color(0.75, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Hull: 3 / 3"
+
+[node name="HelpLabel" type="Label" parent="HUD" unique_id=314635609]
+offset_left = 18.0
+offset_top = 810.0
+theme_override_colors/font_color = Color(0.55, 0.65, 0.85, 1)
+theme_override_font_sizes/font_size = 16
+text = "A/D or ←/→: move · Double tap: Parry"
+
+[node name="ParryLabel" type="Label" parent="HUD" unique_id=169954950]
+offset_left = 18.0
+offset_top = 50.0
+theme_override_colors/font_color = Color(0.45, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "PARRY READY"
+
+[node name="LevelLabel" type="Label" parent="HUD" unique_id=1168058073]
+offset_left = 18.0
+offset_top = 78.0
+theme_override_colors/font_color = Color(0.75, 1, 0.68, 1)
+theme_override_font_sizes/font_size = 16
+text = "Run level: 1"
+
+[node name="ExperienceLabel" type="Label" parent="HUD" unique_id=330526920]
+offset_left = 18.0
+offset_top = 102.0
+theme_override_colors/font_color = Color(0.75, 1, 0.68, 1)
+theme_override_font_sizes/font_size = 16
+text = "XP: 0 / 10"
+
+[node name="ExperienceBar" type="ProgressBar" parent="HUD" unique_id=567433502]
+offset_left = 18.0
+offset_top = 128.0
+offset_right = 180.0
+offset_bottom = 141.0
+show_percentage = false
+
+[node name="RunLabel" type="Label" parent="HUD" unique_id=1637556159]
+offset_left = 120.0
+offset_top = 390.0
+offset_right = 360.0
+offset_bottom = 470.0
+theme_override_colors/font_color = Color(1, 0.45, 0.35, 1)
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="CardPanel" type="Control" parent="HUD" unique_id=1940405344]
+layout_mode = 3
+anchor_left = 0.04
+anchor_top = 0.68
+anchor_right = 0.96
+anchor_bottom = 0.76
+offset_top = 157.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_slots")
+
+[node name="Background" type="ColorRect" parent="HUD/CardPanel" unique_id=421672121]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.008, 0.012, 0.025, 0.94)
+
+[node name="BorderTop" type="ColorRect" parent="HUD/CardPanel" unique_id=54944499]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0.25, 0.55, 0.8, 0.85)
+
+[node name="Slot1Back" type="ColorRect" parent="HUD/CardPanel" unique_id=894891184]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.14
+anchor_right = 0.32
+anchor_bottom = 0.86
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.08, 0.11, 0.17, 1)
+
+[node name="Slot2Back" type="ColorRect" parent="HUD/CardPanel" unique_id=1279042158]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.352
+anchor_top = 0.14
+anchor_right = 0.648
+anchor_bottom = 0.86
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.08, 0.11, 0.17, 1)
+
+[node name="Slot3Back" type="ColorRect" parent="HUD/CardPanel" unique_id=645865045]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.68
+anchor_top = 0.14
+anchor_right = 0.975
+anchor_bottom = 0.86
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.08, 0.11, 0.17, 1)
+
+[node name="Slot1" type="Label" parent="HUD/CardPanel" unique_id=554251431]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.14
+anchor_right = 0.32
+anchor_bottom = 0.86
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "EMPTY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot2" type="Label" parent="HUD/CardPanel" unique_id=595883951]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.352
+anchor_top = 0.14
+anchor_right = 0.648
+anchor_bottom = 0.86
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "EMPTY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot3" type="Label" parent="HUD/CardPanel" unique_id=1219100703]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.68
+anchor_top = 0.14
+anchor_right = 0.975
+anchor_bottom = 0.86
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "EMPTY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot1Button" type="Button" parent="HUD/CardPanel"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.14
+anchor_right = 0.32
+anchor_bottom = 0.86
+flat = true
+disabled = true
+
+[node name="Slot2Button" type="Button" parent="HUD/CardPanel"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.352
+anchor_top = 0.14
+anchor_right = 0.648
+anchor_bottom = 0.86
+flat = true
+disabled = true
+
+[node name="Slot3Button" type="Button" parent="HUD/CardPanel"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.68
+anchor_top = 0.14
+anchor_right = 0.975
+anchor_bottom = 0.86
+flat = true
+disabled = true
+
+[node name="ShopUI" parent="HUD" instance=ExtResource("22_shop_ui")]
+visible = false
+
+[node name="PauseMenu" parent="HUD" instance=ExtResource("23_pause")]
+visible = false

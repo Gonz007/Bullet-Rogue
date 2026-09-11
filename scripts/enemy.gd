@@ -1,0 +1,44 @@
+class_name Enemy
+extends Area2D
+
+signal died(enemy: Enemy, damage_info: DamageInfo)
+
+@export var max_health := 3
+@export var score_value := 1
+@export var experience_value := 2
+
+var health := 0
+var _is_defeated := false
+
+
+func _ready() -> void:
+	health = max_health
+	add_to_group("enemies")
+
+
+func take_damage(damage_info: DamageInfo) -> void:
+	if _is_defeated:
+		return
+	health -= damage_info.amount
+	_flash_hit(damage_info.metadata.get("reflected", false))
+	if health <= 0:
+		_is_defeated = true
+		died.emit(self, damage_info)
+		var color := Color(0.25, 0.95, 1.0) if damage_info.metadata.get("reflected", false) else Color(1.0, 0.55, 0.25)
+		CombatEffect.spawn(get_tree().current_scene, global_position, color, 32.0)
+		queue_free()
+
+
+func leave_arena_if_needed() -> void:
+	if global_position.y > 910.0:
+		queue_free()
+
+
+func get_spawn_position(random: RandomNumberGenerator) -> Vector2:
+	return Vector2(random.randf_range(50.0, 430.0), -45.0)
+
+
+func _flash_hit(reflected: bool) -> void:
+	modulate = Color(0.4, 0.95, 1.0) if reflected else Color.WHITE
+	var tween := create_tween()
+	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
