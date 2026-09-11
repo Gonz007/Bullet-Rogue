@@ -2,6 +2,7 @@
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/ui/sci_fi_button.gd" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/ui/SettingsPanel.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/ui/Hangar.tscn" id="4"]
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -47,6 +48,11 @@ custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 text = "CARDS"
 script = ExtResource("2")
+[node name="Hangar" type="Button" parent="Center/Layout"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+text = "HANGAR"
+script = ExtResource("2")
 [node name="Settings" type="Button" parent="Center/Layout"]
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
@@ -68,4 +74,6 @@ horizontal_alignment = 1
 text = "CARD COLLECTION — COMING SOON"
 visible = false
 [node name="Settings" parent="." instance=ExtResource("3")]
+visible = false
+[node name="Hangar" parent="." instance=ExtResource("4")]
 visible = false

@@ -27,8 +27,15 @@ var _last_tap_time := {"move_left": -1.0, "move_right": -1.0}
 
 func _ready() -> void:
 	add_to_group("player")
+	_apply_equipped_skin()
 	$Weapon.configure(self, $Muzzle)
 	$ParryArea.area_entered.connect(_on_parry_area_entered)
+
+
+func _apply_equipped_skin() -> void:
+	var skin := SkinManager.get_equipped_skin()
+	$Body.color = skin.ship_color
+	$Cockpit.color = skin.cockpit_color
 
 
 func _physics_process(delta: float) -> void:

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SkinData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/skin_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "golden_spear"
+display_name = "Golden Spear"
+description = "Ceremonial gold armor."
+price = 500
+ship_color = Color(1, 0.68, 0.16, 1)
+cockpit_color = Color(1, 0.94, 0.64, 1)

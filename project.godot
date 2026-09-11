@@ -22,6 +22,7 @@ default_bus_layout="res://default_bus_layout.tres"
 [autoload]
 
 SaveManager="*res://scripts/save_manager.gd"
+SkinManager="*res://scripts/skin_manager.gd"
 
 [display]
 

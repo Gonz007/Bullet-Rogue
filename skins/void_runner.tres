@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SkinData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/skin_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "void_runner"
+display_name = "Void Runner"
+description = "Violet stealth plating."
+price = 250
+ship_color = Color(0.48, 0.24, 0.82, 1)
+cockpit_color = Color(0.9, 0.68, 1, 1)
