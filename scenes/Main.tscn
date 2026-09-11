@@ -34,6 +34,7 @@
 [ext_resource type="Script" path="res://scripts/screen_shake.gd" id="33_shake"]
 [ext_resource type="PackedScene" path="res://scenes/ui/ShopUI.tscn" id="22_shop_ui"]
 [ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="23_pause"]
+[ext_resource type="PackedScene" path="res://scenes/ui/TouchControls.tscn" id="34_touch"]
 
 [node name="Main" type="Node2D" unique_id=827351479]
 script = ExtResource("1_main")
@@ -318,3 +319,5 @@ visible = false
 
 [node name="PauseMenu" parent="HUD" instance=ExtResource("23_pause")]
 visible = false
+
+[node name="TouchControls" parent="HUD" instance=ExtResource("34_touch")]
