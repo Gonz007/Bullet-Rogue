@@ -18,6 +18,8 @@ extends Node2D
 @onready var boss_manager: BossManager = $BossManager
 
 var stars: Array[Polygon2D] = []
+var _stage_elapsed := 0.0
+var _stage: StageData
 
 
 func _ready() -> void:
@@ -48,12 +50,16 @@ func _ready() -> void:
 
 
 func _apply_selected_stage() -> void:
-	var stage := StageManager.get_stage()
-	$Background.color = stage.background_color
-	$EnemySpawner.waves = stage.waves
+	_stage = StageManager.get_stage()
+	$Background.color = _stage.background_color
+	$EnemySpawner.waves = _stage.waves
 
 
 func _process(delta: float) -> void:
+	if not player.is_dead and not boss_manager.is_boss_active:
+		_stage_elapsed += delta
+		if _stage != null and _stage_elapsed >= _stage.target_duration:
+			boss_manager.start_boss(_stage.boss_scene)
 	for star in stars:
 		star.position.y += scroll_speed * delta
 		if star.position.y > 880.0:
@@ -156,3 +162,5 @@ func _unhandled_input(event: InputEvent) -> void:
 			card_manager.add_test_card(test_key_to_index[event.keycode])
 		elif event.keycode == KEY_T and not shop_ui.visible:
 			shop_manager.request_shop(run_progress.level)
+		elif event.keycode == KEY_B and not shop_ui.visible:
+			boss_manager.start_boss(_stage.boss_scene if _stage != null else null)
