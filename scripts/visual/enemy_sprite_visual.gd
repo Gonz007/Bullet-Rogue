@@ -9,6 +9,8 @@ const BURST_TEXTURE := preload("res://assets/sprites/enemies/burst.png")
 const RAMMER_TEXTURE := preload("res://assets/sprites/enemies/rammer.png")
 const LARGE_TEXTURE := preload("res://assets/sprites/enemies/large.png")
 const BOSS_TEXTURE := preload("res://assets/sprites/bosses/leviathan_boss.png")
+const STANDARD_SPRITE_SIZE := 64.0
+const BOSS_SPRITE_SIZE := 170.0
 
 
 func _ready() -> void:
@@ -18,7 +20,12 @@ func _ready() -> void:
 	_hide_legacy_polygons(host)
 	var sprite := Sprite2D.new()
 	sprite.texture = _texture_for(host)
-	sprite.scale = Vector2.ONE * (0.50 if host is Boss else 0.72)
+	# Crops have different source resolutions. Normalize them to a fixed on-screen
+	# size so a tall source image cannot turn a regular enemy into a giant.
+	var texture_size := sprite.texture.get_size()
+	var largest_side := maxf(texture_size.x, texture_size.y)
+	var target_size := BOSS_SPRITE_SIZE if host is Boss else STANDARD_SPRITE_SIZE
+	sprite.scale = Vector2.ONE * target_size / largest_side
 	sprite.z_index = 0
 	add_child(sprite)
 
