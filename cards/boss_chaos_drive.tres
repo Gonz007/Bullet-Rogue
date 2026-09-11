@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/cards/card_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/cards/card_effect.gd" id="2"]
+[sub_resource type="Resource" id="1_effect"]
+script = ExtResource("2")
+kind = 9
+value = 1.0
+[resource]
+script = ExtResource("1")
+id = "boss_chaos_drive"
+display_name = "Chaos Drive"
+description = "Boss relic: overload cycles return faster."
+rarity = 3
+effect = SubResource("1_effect")
+is_boss_card = true
+boss_id = "boss_3"
