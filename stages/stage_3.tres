@@ -8,7 +8,7 @@
 script = ExtResource("1_stage")
 id = "stage_3"
 display_name = "STAGE 3: CHAOS ARRAY"
-description = "Locked: defeat the second boss to unlock this route."
+description = "Endure chaotic orbits, bursts and complex formations."
 target_duration = 240.0
 difficulty = 3
 waves = Array[Resource]([ExtResource("3_chaos")])

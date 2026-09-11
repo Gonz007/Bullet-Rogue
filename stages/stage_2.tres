@@ -9,7 +9,7 @@
 script = ExtResource("1_stage")
 id = "stage_2"
 display_name = "STAGE 2: IRON CORRIDOR"
-description = "Locked: defeat the first boss to unlock this route."
+description = "Survive moving firing lines, pincer rushes and iron walls."
 target_duration = 210.0
 difficulty = 2
 waves = Array[Resource]([ExtResource("3_corridor"), ExtResource("4_pincer")])
