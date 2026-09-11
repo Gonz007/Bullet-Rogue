@@ -32,6 +32,7 @@ func take_damage(damage_info: DamageInfo) -> void:
 	_flash_hit(damage_info.metadata.get("reflected", false))
 	if health <= 0:
 		_is_defeated = true
+		get_tree().call_group("run_stats", "register_kill", self)
 		_try_drop_coins()
 		died.emit(self, damage_info)
 		var color := Color(0.25, 0.95, 1.0) if damage_info.metadata.get("reflected", false) else Color(1.0, 0.55, 0.25)

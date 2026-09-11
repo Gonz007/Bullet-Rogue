@@ -16,6 +16,8 @@ extends Node2D
 @onready var pause_menu: PauseMenu = $HUD/PauseMenu
 @onready var drone_formation: DroneFormation = $DroneFormation
 @onready var boss_manager: BossManager = $BossManager
+@onready var run_stats: RunStats = $RunStats
+@onready var results_ui: ResultsUI = $HUD/ResultsUI
 
 var stars: Array[Polygon2D] = []
 var _stage_elapsed := 0.0
@@ -40,6 +42,9 @@ func _ready() -> void:
 	shop_manager.configure(card_manager)
 	shop_manager.shop_requested.connect(shop_ui.open_shop)
 	shop_ui.configure(card_manager, card_slots_hud)
+	shop_ui.closed.connect(_on_shop_closed)
+	results_ui.retry_requested.connect(func() -> void: get_tree().reload_current_scene())
+	results_ui.main_menu_requested.connect(func() -> void: get_tree().change_scene_to_file("res://scenes/MainMenu.tscn"))
 	pause_menu.restart_requested.connect(func() -> void: get_tree().reload_current_scene())
 	pause_menu.main_menu_requested.connect(func() -> void: get_tree().change_scene_to_file("res://scenes/MainMenu.tscn"))
 	run_progress.level_changed.connect(_on_level_changed)
@@ -94,7 +99,8 @@ func _on_parry_state_changed(is_active: bool) -> void:
 func _on_player_died() -> void:
 	$EnemySpawner.set_active(false)
 	card_manager.reset_run_cards()
-	run_label.text = "SHIP DESTROYED\nPress R to restart"
+	run_label.text = "SHIP DESTROYED"
+	results_ui.open_results(run_stats, run_progress.level, false, run_stats.boss_id)
 
 
 func _on_card_rejected(_card: CardData) -> void:
@@ -147,6 +153,7 @@ func _on_boss_phase_changed(phase: int, phase_count: int) -> void:
 func _on_boss_defeated(boss_id: String) -> void:
 	$HUD/BossPanel.visible = false
 	run_label.text = "%s DEFEATED" % boss_id.to_upper()
+	run_stats.boss_id = boss_id
 	SaveManager.mark_boss_defeated(boss_id)
 	if boss_id == "boss_1":
 		SaveManager.unlock_stage("stage_2")
@@ -155,6 +162,13 @@ func _on_boss_defeated(boss_id: String) -> void:
 	var rewards := BossRewardData.get_cards(boss_id)
 	if not rewards.is_empty():
 		shop_ui.open_boss_reward(rewards)
+	else:
+		results_ui.open_results(run_stats, run_progress.level, true, boss_id)
+
+
+func _on_shop_closed() -> void:
+	if not run_stats.boss_id.is_empty() and not player.is_dead:
+		results_ui.open_results(run_stats, run_progress.level, true, run_stats.boss_id)
 
 
 func _unhandled_input(event: InputEvent) -> void:

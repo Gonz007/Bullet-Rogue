@@ -29,6 +29,8 @@
 [ext_resource type="Resource" path="res://cards/boss_rail.tres" id="28_boss_rail"]
 [ext_resource type="Resource" path="res://cards/boss_nova.tres" id="29_boss_nova"]
 [ext_resource type="Resource" path="res://cards/boss_chaos_drive.tres" id="30_boss_chaos"]
+[ext_resource type="Script" path="res://scripts/run_stats.gd" id="31_stats"]
+[ext_resource type="PackedScene" path="res://scenes/ui/ResultsUI.tscn" id="32_results"]
 [ext_resource type="PackedScene" path="res://scenes/ui/ShopUI.tscn" id="22_shop_ui"]
 [ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="23_pause"]
 
@@ -58,6 +60,9 @@ script = ExtResource("23_drones")
 
 [node name="BossManager" type="Node" parent="."]
 script = ExtResource("24_boss_manager")
+
+[node name="RunStats" type="Node" parent="."]
+script = ExtResource("31_stats")
 
 [node name="RunProgress" type="Node" parent="." unique_id=319239813]
 script = ExtResource("8_progress")
@@ -114,6 +119,9 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.75, 0.86, 1, 1)
 horizontal_alignment = 1
 text = "PHASE 1 / 3"
+
+[node name="ResultsUI" parent="HUD" instance=ExtResource("32_results")]
+visible = false
 
 [node name="HelpLabel" type="Label" parent="HUD" unique_id=314635609]
 offset_left = 18.0
