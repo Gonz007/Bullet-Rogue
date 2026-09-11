@@ -17,6 +17,7 @@ func configure(player: Player) -> void:
 	_weapon = player.get_node("Weapon") as Weapon
 	_weapon.set_card_manager(self)
 	player.projectile_parried.connect(_on_projectile_reflected)
+	SynergyManager.recalculate(_cards)
 	cards_changed.emit(_cards)
 
 
@@ -28,6 +29,7 @@ func add_card(card: CardData) -> bool:
 	if runtime_card.effect != null:
 		runtime_card.effect.reset_runtime()
 	_cards.append(runtime_card)
+	SynergyManager.recalculate(_cards)
 	cards_changed.emit(_cards)
 	return true
 
@@ -36,6 +38,7 @@ func remove_card(card_id: String) -> bool:
 	for index in _cards.size():
 		if _cards[index].id == card_id:
 			_cards.remove_at(index)
+			SynergyManager.recalculate(_cards)
 			cards_changed.emit(_cards)
 			return true
 	return false
@@ -48,6 +51,7 @@ func replace_card(slot_index: int, card: CardData) -> bool:
 	if runtime_card.effect != null:
 		runtime_card.effect.reset_runtime()
 	_cards[slot_index] = runtime_card
+	SynergyManager.recalculate(_cards)
 	cards_changed.emit(_cards)
 	return true
 
@@ -79,6 +83,7 @@ func unlock_boss_card(card: CardData) -> void:
 
 func reset_run_cards() -> void:
 	_cards.clear()
+	SynergyManager.recalculate(_cards)
 	cards_changed.emit(_cards)
 
 

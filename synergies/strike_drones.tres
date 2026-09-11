@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/synergies/synergy_data.gd" id="1_synergy"]
+
+[resource]
+script = ExtResource("1_synergy")
+id = "strike_drones"
+display_name = "STRIKE DRONES"
+description = "Double Shot and Triple Shot deploy a pair of firing drones."
+required_card_ids = ["double_shot", "triple_shot"]
+effect_type = "drone_formation"
+parameters = {"drone_count": 2}
