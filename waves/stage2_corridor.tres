@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=5 format=3]
+[ext_resource type="Script" path="res://scripts/wave_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/StraightShooter.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/SpreadShooter.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/MovingShooter.tscn" id="4"]
+[resource]
+script = ExtResource("1")
+display_name = "Corridor Barrage"
+enemy_scenes = Array[PackedScene]([ExtResource("2"), ExtResource("3"), ExtResource("4")])
+spawn_count = 6
+spawn_interval = 0.8
+rest_after = 2.0
+elite_chance = 0.16
+formation = 2
+formation_size = 6

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="StageData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="StageData" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/stage_data.gd" id="1_stage"]
 [ext_resource type="PackedScene" path="res://scenes/bosses/ChaosBoss.tscn" id="2_boss"]
+[ext_resource type="Resource" path="res://waves/stage3_chaos.tres" id="3_chaos"]
 
 [resource]
 script = ExtResource("1_stage")
@@ -10,6 +11,7 @@ display_name = "STAGE 3: CHAOS ARRAY"
 description = "Locked: defeat the second boss to unlock this route."
 target_duration = 240.0
 difficulty = 3
+waves = Array[Resource]([ExtResource("3_chaos")])
 background_color = Color(0.08, 0.02, 0.055, 1)
 boss_scene = ExtResource("2_boss")
 unlock_requirement = "Defeat Boss 2"
