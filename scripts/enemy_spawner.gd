@@ -9,6 +9,8 @@ extends Node
 @export var heavy_chaser_scene: PackedScene
 @export var zigzag_chaser_scene: PackedScene
 @export var rammer_scene: PackedScene
+@export var straight_shooter_scene: PackedScene
+@export var spread_shooter_scene: PackedScene
 @export var spawn_interval := 3.0
 @export var max_active_enemies := 5
 
@@ -38,7 +40,7 @@ func _process(delta: float) -> void:
 func _spawn_next() -> void:
 	if get_tree().get_nodes_in_group("enemies").size() >= max_active_enemies:
 		return
-	var scenes := [chaser_scene, shooter_scene, burst_scene, turret_scene, fast_chaser_scene, heavy_chaser_scene, zigzag_chaser_scene, rammer_scene]
+	var scenes := [chaser_scene, shooter_scene, burst_scene, turret_scene, fast_chaser_scene, heavy_chaser_scene, zigzag_chaser_scene, rammer_scene, straight_shooter_scene, spread_shooter_scene]
 	var enemy_scene: PackedScene = scenes[_next_type]
 	_next_type = (_next_type + 1) % scenes.size()
 	if enemy_scene == null:
