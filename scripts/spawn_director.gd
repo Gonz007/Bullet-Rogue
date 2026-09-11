@@ -3,6 +3,11 @@ extends Node
 
 @export var waves: Array[WaveData] = []
 @export var max_active_enemies := 7
+@export_range(0.0, 0.5, 0.01) var health_growth_per_stage := 0.12
+@export_range(0, 5) var active_enemy_growth_per_stage := 1
+
+var _base_max_active_enemies := 7
+var _stage_difficulty := 1
 
 var _wave_index := 0
 var _spawned := 0
@@ -13,9 +18,15 @@ var _random := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	_random.randomize()
+	_base_max_active_enemies = max_active_enemies
 
 func set_active(value: bool) -> void:
 	_active = value
+
+
+func set_stage_difficulty(difficulty: int) -> void:
+	_stage_difficulty = max(1, difficulty)
+	max_active_enemies = _base_max_active_enemies + active_enemy_growth_per_stage * (_stage_difficulty - 1)
 
 func _process(delta: float) -> void:
 	if not _active or waves.is_empty():
@@ -53,6 +64,7 @@ func _spawn_from_wave(wave: WaveData) -> int:
 	enemy.global_position = enemy.get_spawn_position(_random)
 	if _random.randf() < wave.elite_chance:
 		enemy.apply_elite()
+	_apply_stage_scaling(enemy)
 	_add_enemy(enemy)
 	return 1
 
@@ -69,6 +81,7 @@ func _spawn_formation(wave: WaveData) -> void:
 		enemy.global_position = Vector2(240.0, -50.0) + offset
 		if _random.randf() < wave.elite_chance:
 			enemy.apply_elite()
+		_apply_stage_scaling(enemy)
 		_add_enemy(enemy)
 
 
@@ -89,6 +102,13 @@ func _formation_offset(formation: WaveData.Formation, index: int, count: int) ->
 func _add_enemy(enemy: Enemy) -> void:
 	enemy.died.connect(_on_enemy_died)
 	get_parent().add_child(enemy)
+
+
+func _apply_stage_scaling(enemy: Enemy) -> void:
+	if _stage_difficulty <= 1:
+		return
+	enemy.max_health = ceili(enemy.max_health * (1.0 + health_growth_per_stage * (_stage_difficulty - 1)))
+	enemy.experience_value += _stage_difficulty - 1
 
 
 func _on_enemy_died(enemy: Enemy, _damage_info: DamageInfo) -> void:

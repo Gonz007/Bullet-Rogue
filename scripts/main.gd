@@ -63,6 +63,7 @@ func _apply_selected_stage() -> void:
 	_stage = StageManager.get_stage()
 	$Background.color = _stage.background_color
 	$EnemySpawner.waves = _stage.waves
+	$EnemySpawner.set_stage_difficulty(_stage.difficulty)
 
 
 func _process(delta: float) -> void:
