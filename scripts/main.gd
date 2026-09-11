@@ -37,6 +37,7 @@ func _ready() -> void:
 	drone_formation.configure(player, card_manager)
 	SynergyManager.synergy_unlocked.connect(_on_synergy_unlocked)
 	boss_manager.boss_started.connect(_on_boss_started)
+	boss_manager.boss_warning.connect(_on_boss_warning)
 	boss_manager.boss_health_changed.connect(_on_boss_health_changed)
 	boss_manager.boss_phase_changed.connect(_on_boss_phase_changed)
 	boss_manager.boss_defeated.connect(_on_boss_defeated)
@@ -139,7 +140,11 @@ func _on_synergy_unlocked(synergy: SynergyData) -> void:
 func _on_boss_started(boss: Boss) -> void:
 	$HUD/BossPanel.visible = true
 	$HUD/BossPanel/Name.text = boss.boss_display_name
-	run_label.text = "WARNING: %s" % boss.boss_display_name
+	run_label.text = ""
+
+
+func _on_boss_warning(boss_name: String) -> void:
+	run_label.text = "WARNING\n%s INCOMING" % boss_name
 
 
 func _on_boss_health_changed(current: int, maximum: int) -> void:
