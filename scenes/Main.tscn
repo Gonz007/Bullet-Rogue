@@ -31,6 +31,7 @@
 [ext_resource type="Resource" path="res://cards/boss_chaos_drive.tres" id="30_boss_chaos"]
 [ext_resource type="Script" path="res://scripts/run_stats.gd" id="31_stats"]
 [ext_resource type="PackedScene" path="res://scenes/ui/ResultsUI.tscn" id="32_results"]
+[ext_resource type="Script" path="res://scripts/screen_shake.gd" id="33_shake"]
 [ext_resource type="PackedScene" path="res://scenes/ui/ShopUI.tscn" id="22_shop_ui"]
 [ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="23_pause"]
 
@@ -63,6 +64,9 @@ script = ExtResource("24_boss_manager")
 
 [node name="RunStats" type="Node" parent="."]
 script = ExtResource("31_stats")
+
+[node name="ScreenShake" type="Node" parent="."]
+script = ExtResource("33_shake")
 
 [node name="RunProgress" type="Node" parent="." unique_id=319239813]
 script = ExtResource("8_progress")

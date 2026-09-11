@@ -115,6 +115,15 @@ func is_synergy_discovered(synergy_id: String) -> bool:
 	return _data.get("discovered_synergies", []).has(synergy_id)
 
 
+func is_screen_shake_enabled() -> bool:
+	return bool(_data.get("screen_shake_enabled", true))
+
+
+func set_screen_shake_enabled(enabled: bool) -> void:
+	_data["screen_shake_enabled"] = enabled
+	save()
+
+
 func _append_unique(key: String, value: String) -> void:
 	var values: Array = _data.get(key, [])
 	if not values.has(value):
@@ -133,7 +142,8 @@ func _default_data() -> Dictionary:
 		"defeated_bosses": [],
 		"unlocked_stages": ["stage_1"],
 		"boss_tokens": [],
-		"discovered_synergies": []
+		"discovered_synergies": [],
+		"screen_shake_enabled": true
 	}
 
 

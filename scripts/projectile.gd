@@ -18,8 +18,13 @@ var metadata: Dictionary = {}
 var pierce_remaining := 0
 var bounces_remaining := 0
 
+const MAX_ACTIVE_PROJECTILES := 360
+
 
 func _ready() -> void:
+	if get_tree().get_nodes_in_group("projectiles").size() >= MAX_ACTIVE_PROJECTILES:
+		queue_free()
+		return
 	add_to_group("projectiles")
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)
@@ -71,6 +76,7 @@ func reflect(new_direction: Vector2, new_speed: float, new_owner: Node = null) -
 	_apply_collision_profile()
 	_update_visuals()
 	CombatEffect.spawn(get_tree().current_scene, global_position, Color(0.25, 0.95, 1.0), 20.0)
+	get_tree().call_group("screen_shake", "shake", 3.5, 0.1)
 	AudioManager.play_sfx("reflect")
 	reflected.emit(self)
 

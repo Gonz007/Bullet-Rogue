@@ -54,6 +54,9 @@ tooltip_text = "SFX VOLUME"
 [node name="Fullscreen" type="CheckButton" parent="Panel/Layout"]
 layout_mode = 2
 text = "FULLSCREEN"
+[node name="ScreenShake" type="CheckButton" parent="Panel/Layout"]
+layout_mode = 2
+text = "SCREEN SHAKE"
 [node name="Back" type="Button" parent="Panel/Layout"]
 custom_minimum_size = Vector2(0, 38)
 layout_mode = 2

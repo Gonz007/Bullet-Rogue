@@ -9,7 +9,9 @@ func _ready() -> void:
 	$Panel/Layout/Master.value_changed.connect(func(value: float) -> void: _set_bus_volume("Master", value))
 	$Panel/Layout/Music.value_changed.connect(func(value: float) -> void: _set_bus_volume("Music", value))
 	$Panel/Layout/SFX.value_changed.connect(func(value: float) -> void: _set_bus_volume("SFX", value))
+	$Panel/Layout/ScreenShake.toggled.connect(SaveManager.set_screen_shake_enabled)
 	$Panel/Layout/Fullscreen.button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	$Panel/Layout/ScreenShake.button_pressed = SaveManager.is_screen_shake_enabled()
 
 
 func _on_fullscreen_toggled(enabled: bool) -> void:
