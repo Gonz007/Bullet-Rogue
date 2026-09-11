@@ -21,6 +21,7 @@
 [ext_resource type="Resource" path="res://cards/counter_shot.tres" id="19_counter"]
 [ext_resource type="Resource" path="res://cards/overload.tres" id="20_overload"]
 [ext_resource type="Script" path="res://scripts/shop/shop_manager.gd" id="21_shop_manager"]
+[ext_resource type="Script" path="res://scripts/synergies/drone_formation.gd" id="23_drones"]
 [ext_resource type="PackedScene" path="res://scenes/ui/ShopUI.tscn" id="22_shop_ui"]
 [ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="23_pause"]
 
@@ -44,6 +45,9 @@ position = Vector2(240, 700)
 script = ExtResource("3_director")
 waves = Array[Resource]([ExtResource("4_pursuit"), ExtResource("5_crossfire"), ExtResource("6_pressure")])
 max_active_enemies = 7
+
+[node name="DroneFormation" type="Node2D" parent="."]
+script = ExtResource("23_drones")
 
 [node name="RunProgress" type="Node" parent="." unique_id=319239813]
 script = ExtResource("8_progress")

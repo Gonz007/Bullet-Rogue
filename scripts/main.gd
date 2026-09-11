@@ -14,6 +14,7 @@ extends Node2D
 @onready var shop_manager: ShopManager = $ShopManager
 @onready var shop_ui: ShopUI = $HUD/ShopUI
 @onready var pause_menu: PauseMenu = $HUD/PauseMenu
+@onready var drone_formation: DroneFormation = $DroneFormation
 
 var stars: Array[Polygon2D] = []
 
@@ -27,6 +28,7 @@ func _ready() -> void:
 	card_manager.cards_changed.connect(card_slots_hud.show_cards)
 	card_manager.card_rejected.connect(_on_card_rejected)
 	card_manager.configure(player)
+	drone_formation.configure(player, card_manager)
 	shop_manager.configure(card_manager)
 	shop_manager.shop_requested.connect(shop_ui.open_shop)
 	shop_ui.configure(card_manager, card_slots_hud)
