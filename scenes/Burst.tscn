@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/burst.gd" id="1_burst"]
 [ext_resource type="PackedScene" path="res://scenes/Projectile.tscn" id="2_projectile"]
+[ext_resource type="PackedScene" path="res://scenes/CoinPickup.tscn" id="3_coin"]
 
 [sub_resource type="CircleShape2D" id="1_shape"]
 radius = 22.0
@@ -13,6 +14,8 @@ script = ExtResource("1_burst")
 projectile_scene = ExtResource("2_projectile")
 max_health = 9
 experience_value = 4
+coin_drop_chance = 0.15
+coin_pickup_scene = ExtResource("3_coin")
 
 [node name="Body" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(0, -30, 25, -10, 20, 24, 0, 30, -20, 24, -25, -10)

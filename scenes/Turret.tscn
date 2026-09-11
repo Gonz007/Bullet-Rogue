@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/turret.gd" id="1_turret"]
 [ext_resource type="PackedScene" path="res://scenes/Projectile.tscn" id="2_projectile"]
+[ext_resource type="PackedScene" path="res://scenes/CoinPickup.tscn" id="3_coin"]
 
 [sub_resource type="CircleShape2D" id="1_shape"]
 radius = 24.0
@@ -13,6 +14,8 @@ script = ExtResource("1_turret")
 projectile_scene = ExtResource("2_projectile")
 max_health = 8
 experience_value = 4
+coin_drop_chance = 0.15
+coin_pickup_scene = ExtResource("3_coin")
 
 [node name="Body" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-28, -17, 28, -17, 22, 22, -22, 22)

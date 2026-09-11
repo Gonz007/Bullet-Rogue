@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_shooter"]
 [ext_resource type="PackedScene" path="res://scenes/Projectile.tscn" id="2_projectile"]
+[ext_resource type="PackedScene" path="res://scenes/CoinPickup.tscn" id="3_coin"]
 
 [sub_resource type="CircleShape2D" id="1_shape"]
 radius = 20.0
@@ -13,6 +14,8 @@ script = ExtResource("1_shooter")
 projectile_scene = ExtResource("2_projectile")
 max_health = 7
 experience_value = 3
+coin_drop_chance = 0.1
+coin_pickup_scene = ExtResource("3_coin")
 
 [node name="Body" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-24, -13, 0, -27, 24, -13, 16, 22, -16, 22)

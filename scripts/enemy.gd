@@ -6,6 +6,11 @@ signal died(enemy: Enemy, damage_info: DamageInfo)
 @export var max_health := 3
 @export var score_value := 1
 @export var experience_value := 2
+@export_category("Permanent Coin Drops")
+@export_range(0.0, 1.0, 0.01) var coin_drop_chance := 0.05
+@export var coin_drop_amount_min := 1
+@export var coin_drop_amount_max := 1
+@export var coin_pickup_scene: PackedScene
 
 var health := 0
 var _is_defeated := false
@@ -23,6 +28,7 @@ func take_damage(damage_info: DamageInfo) -> void:
 	_flash_hit(damage_info.metadata.get("reflected", false))
 	if health <= 0:
 		_is_defeated = true
+		_try_drop_coins()
 		died.emit(self, damage_info)
 		var color := Color(0.25, 0.95, 1.0) if damage_info.metadata.get("reflected", false) else Color(1.0, 0.55, 0.25)
 		CombatEffect.spawn(get_tree().current_scene, global_position, color, 32.0)
@@ -42,3 +48,12 @@ func _flash_hit(reflected: bool) -> void:
 	modulate = Color(0.4, 0.95, 1.0) if reflected else Color.WHITE
 	var tween := create_tween()
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+
+
+func _try_drop_coins() -> void:
+	if coin_pickup_scene == null or randf() > coin_drop_chance:
+		return
+	var coin := coin_pickup_scene.instantiate() as CoinPickup
+	coin.global_position = global_position
+	coin.amount = randi_range(coin_drop_amount_min, max(coin_drop_amount_min, coin_drop_amount_max))
+	get_tree().current_scene.add_child(coin)
