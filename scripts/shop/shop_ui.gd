@@ -12,6 +12,7 @@ var _card_manager: CardManager
 var _card_slots_hud: CardSlotsHud
 var _offers: Array[CardData] = []
 var _pending_card: CardData
+var _is_boss_reward := false
 
 
 func _ready() -> void:
@@ -29,6 +30,22 @@ func configure(card_manager: CardManager, card_slots_hud: CardSlotsHud) -> void:
 
 
 func open_shop(offers: Array[CardData]) -> void:
+	_is_boss_reward = false
+	$Center/Panel/Margin/Layout/LevelUp.visible = true
+	$Center/Panel/Margin/Layout/ShopTitle.text = "SHOP"
+	$Center/Panel/Margin/Layout/Skip.visible = true
+	_open_cards(offers)
+
+
+func open_boss_reward(offers: Array[CardData]) -> void:
+	_is_boss_reward = true
+	$Center/Panel/Margin/Layout/LevelUp.visible = false
+	$Center/Panel/Margin/Layout/ShopTitle.text = "BOSS DEFEATED — CHOOSE ONE RELIC"
+	$Center/Panel/Margin/Layout/Skip.visible = false
+	_open_cards(offers)
+
+
+func _open_cards(offers: Array[CardData]) -> void:
 	_offers = offers
 	_pending_card = null
 	_instruction.text = "CHOOSE A NEW CARD"
@@ -55,6 +72,7 @@ func _on_offer_view_pressed(view: CardView) -> void:
 		offer_view.set_selected(offer_view == view)
 	if _card_manager.has_space():
 		_card_manager.add_card(_pending_card)
+		_unlock_reward_if_needed()
 		_close_shop()
 		return
 	_instruction.text = "CHOOSE A CARD TO REPLACE"
@@ -66,6 +84,7 @@ func _on_current_view_pressed(view: CardView) -> void:
 	if _pending_card == null or view.slot_index < 0:
 		return
 	if _card_manager.replace_card(view.slot_index, _pending_card):
+		_unlock_reward_if_needed()
 		_close_shop()
 
 
@@ -89,3 +108,8 @@ func _close_shop() -> void:
 	visible = false
 	get_tree().paused = false
 	closed.emit()
+
+
+func _unlock_reward_if_needed() -> void:
+	if _is_boss_reward and _pending_card != null:
+		_card_manager.unlock_boss_card(_pending_card)

@@ -7,7 +7,6 @@ signal card_rejected(card: CardData)
 @export var test_cards: Array[CardData] = []
 
 var _cards: Array[CardData] = []
-var _permanent_unlocked: Dictionary = {}
 var _player: Player
 var _weapon: Weapon
 
@@ -71,14 +70,14 @@ func get_cards() -> Array[CardData]:
 func get_card_state(card: CardData) -> CardData.State:
 	if has_card(card.id):
 		return CardData.State.OWNED_IN_RUN
-	if card.is_boss_card and not _permanent_unlocked.get(card.id, false):
+	if card.is_boss_card and not SaveManager.is_boss_card_unlocked(card.id):
 		return CardData.State.LOCKED
 	return CardData.State.UNLOCKED
 
 
 func unlock_boss_card(card: CardData) -> void:
 	if card.is_boss_card:
-		_permanent_unlocked[card.id] = true
+		SaveManager.unlock_boss_card(card.id)
 
 
 func reset_run_cards() -> void:

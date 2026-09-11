@@ -144,6 +144,12 @@ func _on_boss_phase_changed(phase: int, phase_count: int) -> void:
 func _on_boss_defeated(boss_id: String) -> void:
 	$HUD/BossPanel.visible = false
 	run_label.text = "%s DEFEATED" % boss_id.to_upper()
+	SaveManager.mark_boss_defeated(boss_id)
+	if boss_id == "boss_1":
+		SaveManager.unlock_stage("stage_2")
+	var rewards := BossRewardData.get_cards(boss_id)
+	if not rewards.is_empty():
+		shop_ui.open_boss_reward(rewards)
 
 
 func _unhandled_input(event: InputEvent) -> void:

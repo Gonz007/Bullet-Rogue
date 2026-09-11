@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/cards/card_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/cards/card_effect.gd" id="2"]
+[sub_resource type="Resource" id="1_effect"]
+script = ExtResource("2")
+kind = 4
+value = 2.0
+[resource]
+script = ExtResource("1")
+id = "boss_prism"
+display_name = "Prism Array"
+description = "Boss relic: shots gain two extra rebounds."
+rarity = 3
+tags = Array[String](["boss", "ricochet"])
+effect = SubResource("1_effect")
+is_boss_card = true
+boss_id = "boss_1"
