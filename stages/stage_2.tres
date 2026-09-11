@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="StageData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="StageData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/stage_data.gd" id="1_stage"]
+[ext_resource type="PackedScene" path="res://scenes/bosses/CorridorBoss.tscn" id="2_boss"]
 
 [resource]
 script = ExtResource("1_stage")
@@ -10,4 +11,5 @@ description = "Locked: defeat the first boss to unlock this route."
 target_duration = 210.0
 difficulty = 2
 background_color = Color(0.06, 0.025, 0.1, 1)
+boss_scene = ExtResource("2_boss")
 unlock_requirement = "Defeat Boss 1"

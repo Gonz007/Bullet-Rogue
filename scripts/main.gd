@@ -147,6 +147,8 @@ func _on_boss_defeated(boss_id: String) -> void:
 	SaveManager.mark_boss_defeated(boss_id)
 	if boss_id == "boss_1":
 		SaveManager.unlock_stage("stage_2")
+	elif boss_id == "boss_2":
+		SaveManager.unlock_stage("stage_3")
 	var rewards := BossRewardData.get_cards(boss_id)
 	if not rewards.is_empty():
 		shop_ui.open_boss_reward(rewards)

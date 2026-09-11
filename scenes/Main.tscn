@@ -25,6 +25,8 @@
 [ext_resource type="Script" path="res://scripts/bosses/boss_manager.gd" id="24_boss_manager"]
 [ext_resource type="Resource" path="res://cards/boss_prism.tres" id="25_boss_prism"]
 [ext_resource type="Resource" path="res://cards/boss_singularity.tres" id="26_boss_singularity"]
+[ext_resource type="Resource" path="res://cards/boss_bulwark.tres" id="27_boss_bulwark"]
+[ext_resource type="Resource" path="res://cards/boss_rail.tres" id="28_boss_rail"]
 [ext_resource type="PackedScene" path="res://scenes/ui/ShopUI.tscn" id="22_shop_ui"]
 [ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="23_pause"]
 
@@ -60,11 +62,11 @@ script = ExtResource("8_progress")
 
 [node name="CardManager" type="Node" parent="." unique_id=1537612501]
 script = ExtResource("9_cards")
-test_cards = Array[ExtResource("10_1iba3")]([ExtResource("11_double"), ExtResource("12_pierce"), ExtResource("13_split"), ExtResource("14_combustion"), ExtResource("15_rocket"), ExtResource("16_triple"), ExtResource("17_bounce"), ExtResource("18_reflector"), ExtResource("19_counter"), ExtResource("20_overload"), ExtResource("25_boss_prism"), ExtResource("26_boss_singularity")])
+test_cards = Array[ExtResource("10_1iba3")]([ExtResource("11_double"), ExtResource("12_pierce"), ExtResource("13_split"), ExtResource("14_combustion"), ExtResource("15_rocket"), ExtResource("16_triple"), ExtResource("17_bounce"), ExtResource("18_reflector"), ExtResource("19_counter"), ExtResource("20_overload"), ExtResource("25_boss_prism"), ExtResource("26_boss_singularity"), ExtResource("27_boss_bulwark"), ExtResource("28_boss_rail")])
 
 [node name="ShopManager" type="Node" parent="."]
 script = ExtResource("21_shop_manager")
-card_catalog = Array[ExtResource("10_1iba3")]([ExtResource("11_double"), ExtResource("12_pierce"), ExtResource("13_split"), ExtResource("14_combustion"), ExtResource("15_rocket"), ExtResource("16_triple"), ExtResource("17_bounce"), ExtResource("18_reflector"), ExtResource("19_counter"), ExtResource("20_overload"), ExtResource("25_boss_prism"), ExtResource("26_boss_singularity")])
+card_catalog = Array[ExtResource("10_1iba3")]([ExtResource("11_double"), ExtResource("12_pierce"), ExtResource("13_split"), ExtResource("14_combustion"), ExtResource("15_rocket"), ExtResource("16_triple"), ExtResource("17_bounce"), ExtResource("18_reflector"), ExtResource("19_counter"), ExtResource("20_overload"), ExtResource("25_boss_prism"), ExtResource("26_boss_singularity"), ExtResource("27_boss_bulwark"), ExtResource("28_boss_rail")])
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1980825833]
 
