@@ -124,6 +124,17 @@ func set_screen_shake_enabled(enabled: bool) -> void:
 	save()
 
 
+func get_setting(key: String, default_value: Variant) -> Variant:
+	return _data.get("settings", {}).get(key, default_value)
+
+
+func set_setting(key: String, value: Variant) -> void:
+	var settings: Dictionary = _data.get("settings", {})
+	settings[key] = value
+	_data["settings"] = settings
+	save()
+
+
 func _append_unique(key: String, value: String) -> void:
 	var values: Array = _data.get(key, [])
 	if not values.has(value):
@@ -143,7 +154,8 @@ func _default_data() -> Dictionary:
 		"unlocked_stages": ["stage_1"],
 		"boss_tokens": [],
 		"discovered_synergies": [],
-		"screen_shake_enabled": true
+		"screen_shake_enabled": true,
+		"settings": {"master_volume": 0.8, "music_volume": 0.8, "sfx_volume": 0.8, "fullscreen": false}
 	}
 
 
