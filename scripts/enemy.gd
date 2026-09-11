@@ -24,6 +24,9 @@ func _ready() -> void:
 	health = max_health
 	add_to_group("enemies")
 	body_entered.connect(_on_body_entered)
+	var sprite_visual := EnemySpriteVisual.new()
+	sprite_visual.name = "SpriteVisual"
+	add_child(sprite_visual)
 	var visual := OrganicEnemyVisual.new()
 	visual.name = "OrganicMachineAccent"
 	add_child(visual)

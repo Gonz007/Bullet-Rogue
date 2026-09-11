@@ -19,6 +19,10 @@ var pierce_remaining := 0
 var bounces_remaining := 0
 
 const MAX_ACTIVE_PROJECTILES := 360
+const PLAYER_SHOT_TEXTURE := preload("res://assets/sprites/projectiles/player_shot.png")
+const ENEMY_SHOT_TEXTURE := preload("res://assets/sprites/projectiles/enemy_shot.png")
+
+var _sprite_visual: Sprite2D
 
 
 func _ready() -> void:
@@ -26,6 +30,11 @@ func _ready() -> void:
 		queue_free()
 		return
 	add_to_group("projectiles")
+	_sprite_visual = Sprite2D.new()
+	_sprite_visual.scale = Vector2.ONE * 0.28
+	_sprite_visual.z_index = 1
+	add_child(_sprite_visual)
+	$Visual.visible = false
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)
 	_create_damage_info()
@@ -121,6 +130,9 @@ func _apply_collision_profile() -> void:
 
 
 func _update_visuals() -> void:
+	if _sprite_visual != null:
+		_sprite_visual.texture = PLAYER_SHOT_TEXTURE if team == Team.PLAYER else ENEMY_SHOT_TEXTURE
+		_sprite_visual.modulate = Color(0.42, 1.0, 0.94, 1.0) if metadata.get("reflected", false) else Color.WHITE
 	if team == Team.PLAYER:
 		$Visual.color = Color(0.35, 0.95, 1.0) if metadata.get("reflected", false) else Color(1.0, 0.9, 0.25)
 		$Visual.scale = Vector2.ONE
