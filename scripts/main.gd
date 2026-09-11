@@ -15,6 +15,7 @@ extends Node2D
 @onready var shop_ui: ShopUI = $HUD/ShopUI
 @onready var pause_menu: PauseMenu = $HUD/PauseMenu
 @onready var drone_formation: DroneFormation = $DroneFormation
+@onready var boss_manager: BossManager = $BossManager
 
 var stars: Array[Polygon2D] = []
 
@@ -30,6 +31,10 @@ func _ready() -> void:
 	card_manager.configure(player)
 	drone_formation.configure(player, card_manager)
 	SynergyManager.synergy_unlocked.connect(_on_synergy_unlocked)
+	boss_manager.boss_started.connect(_on_boss_started)
+	boss_manager.boss_health_changed.connect(_on_boss_health_changed)
+	boss_manager.boss_phase_changed.connect(_on_boss_phase_changed)
+	boss_manager.boss_defeated.connect(_on_boss_defeated)
 	shop_manager.configure(card_manager)
 	shop_manager.shop_requested.connect(shop_ui.open_shop)
 	shop_ui.configure(card_manager, card_slots_hud)
@@ -113,6 +118,26 @@ func _on_synergy_unlocked(synergy: SynergyData) -> void:
 	tween.tween_interval(1.5)
 	tween.tween_property(notice, "modulate:a", 0.0, 0.35)
 	tween.tween_callback(func() -> void: notice.visible = false)
+
+
+func _on_boss_started(boss: Boss) -> void:
+	$HUD/BossPanel.visible = true
+	$HUD/BossPanel/Name.text = boss.boss_display_name
+	run_label.text = "WARNING: %s" % boss.boss_display_name
+
+
+func _on_boss_health_changed(current: int, maximum: int) -> void:
+	$HUD/BossPanel/Health.max_value = maximum
+	$HUD/BossPanel/Health.value = current
+
+
+func _on_boss_phase_changed(phase: int, phase_count: int) -> void:
+	$HUD/BossPanel/Phase.text = "PHASE %d / %d" % [phase, phase_count]
+
+
+func _on_boss_defeated(boss_id: String) -> void:
+	$HUD/BossPanel.visible = false
+	run_label.text = "%s DEFEATED" % boss_id.to_upper()
 
 
 func _unhandled_input(event: InputEvent) -> void:

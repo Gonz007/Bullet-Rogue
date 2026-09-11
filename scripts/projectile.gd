@@ -20,6 +20,7 @@ var bounces_remaining := 0
 
 
 func _ready() -> void:
+	add_to_group("projectiles")
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)
 	_create_damage_info()
