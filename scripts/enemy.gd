@@ -17,6 +17,7 @@ signal died(enemy: Enemy, damage_info: DamageInfo)
 
 var health := 0
 var _is_defeated := false
+var is_elite := false
 
 
 func _ready() -> void:
@@ -49,6 +50,28 @@ func leave_arena_if_needed() -> void:
 
 func get_spawn_position(random: RandomNumberGenerator) -> Vector2:
 	return Vector2(random.randf_range(50.0, 430.0), -45.0)
+
+
+func apply_elite() -> void:
+	if is_elite:
+		return
+	is_elite = true
+	max_health = ceili(max_health * 1.5)
+	experience_value *= 2
+	coin_drop_chance = minf(1.0, coin_drop_chance + 0.2)
+	contact_damage += 1
+	scale *= 1.12
+	modulate = Color(1.0, 0.72, 0.18)
+	if self is Chaser:
+		var chaser := self as Chaser
+		chaser.horizontal_speed *= 1.28
+		chaser.descent_speed *= 1.16
+	if self is Shooter:
+		(self as Shooter).fire_interval *= 0.72
+	if self is BurstEnemy:
+		var burst := self as BurstEnemy
+		burst.burst_count += 2
+		burst.burst_interval *= 0.8
 
 
 func _flash_hit(reflected: bool) -> void:
