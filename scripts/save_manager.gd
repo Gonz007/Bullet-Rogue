@@ -29,6 +29,7 @@ func load_save() -> void:
 		_merge_with_defaults(parsed)
 	else:
 		push_warning("Save data was invalid; using defaults.")
+		save()
 	save_loaded.emit()
 	coins_changed.emit(get_coins())
 
