@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/synergies/synergy_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "cluster_bomb"
+display_name = "CLUSTER BOMB"
+description = "Split fragments emit a second explosive cluster."
+required_card_ids = ["split", "combustion"]
+effect_type = "cluster_fragment"

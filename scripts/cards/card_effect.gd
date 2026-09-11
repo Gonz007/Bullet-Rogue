@@ -52,6 +52,7 @@ func on_event(event_name: String, context: Dictionary, manager: CardManager) -> 
 			elif event_name == "before_shot" and _counter_shot_ready:
 				context["damage"] += int(value)
 				context["tags"].append("counter_shot")
+				context["metadata"]["counter_shot"] = true
 				_counter_shot_ready = false
 		Kind.ROCKET:
 			if event_name == "tick":

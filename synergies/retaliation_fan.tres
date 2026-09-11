@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/synergies/synergy_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "retaliation_fan"
+display_name = "RETALIATION FAN"
+description = "Counter Shot unfolds into a three-way retaliatory fan."
+required_card_ids = ["counter_shot", "triple_shot"]
+effect_type = "counter_fan"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/synergies/synergy_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "mirror_fracture"
+display_name = "MIRROR FRACTURE"
+description = "Parried shots split into two mirror fragments."
+required_card_ids = ["parry_reflector", "split"]
+effect_type = "reflect_split"

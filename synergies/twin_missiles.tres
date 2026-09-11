@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/synergies/synergy_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "twin_missiles"
+display_name = "TWIN MISSILES"
+description = "Double Shot supports the rocket system with a dual launch profile."
+required_card_ids = ["rocket", "double_shot"]
+effect_type = "dual_rocket"

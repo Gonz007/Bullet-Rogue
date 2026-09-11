@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/synergies/synergy_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "ricochet_fan"
+display_name = "RICOCHET FAN"
+description = "Triple Shot and Bounce widen into a ricocheting fan."
+required_card_ids = ["triple_shot", "bounce"]
+effect_type = "wide_fan"

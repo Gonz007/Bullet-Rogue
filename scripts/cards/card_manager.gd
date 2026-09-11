@@ -125,7 +125,10 @@ func spawn_player_projectiles(position: Vector2, directions: Array, damage: int,
 func spawn_rocket() -> void:
 	if _player == null or _weapon == null:
 		return
-	spawn_player_projectiles(_player.get_node("Muzzle").global_position, [Vector2.UP], 3, 420.0, {"rocket": true})
+	var directions: Array = [Vector2.UP]
+	if SynergyManager.has_synergy("twin_missiles"):
+		directions = [Vector2.UP.rotated(-0.12), Vector2.UP.rotated(0.12)]
+	spawn_player_projectiles(_player.get_node("Muzzle").global_position, directions, 3, 420.0, {"rocket": true})
 
 
 func _process(delta: float) -> void:
@@ -144,3 +147,4 @@ func _dispatch(event_name: String, context: Dictionary) -> void:
 	for card in _cards:
 		if card.effect != null:
 			card.effect.on_event(event_name, context, self)
+	SynergyManager.on_combat_event(event_name, context, self)
