@@ -19,6 +19,7 @@ var stars: Array[Polygon2D] = []
 
 
 func _ready() -> void:
+	_apply_selected_stage()
 	_create_starfield()
 	player.health_changed.connect(_on_player_health_changed)
 	player.parry_state_changed.connect(_on_parry_state_changed)
@@ -36,6 +37,12 @@ func _ready() -> void:
 	_on_player_health_changed(player.health, player.max_health)
 	_on_level_changed(run_progress.level)
 	_on_experience_changed(run_progress.experience, run_progress.experience_required)
+
+
+func _apply_selected_stage() -> void:
+	var stage := StageManager.get_stage()
+	$Background.color = stage.background_color
+	$EnemySpawner.waves = stage.waves
 
 
 func _process(delta: float) -> void:

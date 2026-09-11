@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StageData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/stage_data.gd" id="1_stage"]
+[ext_resource type="Resource" path="res://waves/stage1_pursuit.tres" id="2_pursuit"]
+[ext_resource type="Resource" path="res://waves/stage1_crossfire.tres" id="3_crossfire"]
+[ext_resource type="Resource" path="res://waves/stage1_pressure.tres" id="4_pressure"]
+
+[resource]
+script = ExtResource("1_stage")
+id = "stage_1"
+display_name = "STAGE 1: FIRST CONTACT"
+description = "Learn the rhythm of pursuit, fire and parry."
+target_duration = 180.0
+difficulty = 1
+waves = Array[Resource]([ExtResource("2_pursuit"), ExtResource("3_crossfire"), ExtResource("4_pressure")])
+background_color = Color(0.025, 0.04, 0.1, 1)

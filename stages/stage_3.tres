@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StageData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/stage_data.gd" id="1_stage"]
+
+[resource]
+script = ExtResource("1_stage")
+id = "stage_3"
+display_name = "STAGE 3: CHAOS ARRAY"
+description = "Locked: defeat the second boss to unlock this route."
+target_duration = 240.0
+difficulty = 3
+background_color = Color(0.08, 0.02, 0.055, 1)
+unlock_requirement = "Defeat Boss 2"
