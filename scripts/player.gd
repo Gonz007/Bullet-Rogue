@@ -77,6 +77,7 @@ func _start_parry(direction: float) -> void:
 	_parry_time_remaining = parry_duration
 	$ParryArea.monitoring = true
 	parry_state_changed.emit(true)
+	AudioManager.play_sfx("parry")
 	queue_redraw()
 
 
@@ -109,6 +110,7 @@ func take_damage(amount: int) -> void:
 		return
 	health = max(health - amount, 0)
 	health_changed.emit(health, max_health)
+	AudioManager.play_sfx("player_hit")
 	if health == 0:
 		is_dead = true
 		$Weapon.set_active(false)

@@ -37,6 +37,7 @@ func take_damage(damage_info: DamageInfo) -> void:
 		died.emit(self, damage_info)
 		var color := Color(0.25, 0.95, 1.0) if damage_info.metadata.get("reflected", false) else Color(1.0, 0.55, 0.25)
 		CombatEffect.spawn(get_tree().current_scene, global_position, color, 32.0)
+		AudioManager.play_sfx("enemy_kill")
 		queue_free()
 
 

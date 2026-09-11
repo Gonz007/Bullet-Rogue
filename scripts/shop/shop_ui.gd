@@ -68,6 +68,7 @@ func _on_offer_view_pressed(view: CardView) -> void:
 	if view.card == null or _card_manager == null:
 		return
 	_pending_card = view.card
+	AudioManager.play_sfx("card_selected")
 	for offer_view in _offer_views:
 		offer_view.set_selected(offer_view == view)
 	if _card_manager.has_space():

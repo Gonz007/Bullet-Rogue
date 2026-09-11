@@ -50,3 +50,4 @@ func fire(shot_direction: Vector2) -> void:
 		if _card_manager != null:
 			_card_manager.register_projectile(projectile)
 		projectile_fired.emit(projectile)
+	AudioManager.play_sfx("player_shot")

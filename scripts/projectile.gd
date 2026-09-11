@@ -71,6 +71,7 @@ func reflect(new_direction: Vector2, new_speed: float, new_owner: Node = null) -
 	_apply_collision_profile()
 	_update_visuals()
 	CombatEffect.spawn(get_tree().current_scene, global_position, Color(0.25, 0.95, 1.0), 20.0)
+	AudioManager.play_sfx("reflect")
 	reflected.emit(self)
 
 
