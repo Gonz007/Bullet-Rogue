@@ -1,0 +1,50 @@
+[gd_scene]
+
+[node name="BossLab" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.01, 0.025, 0.06, 1)
+[node name="Layout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.12
+anchor_top = 0.22
+anchor_right = 0.88
+anchor_bottom = 0.78
+theme_override_constants/separation = 14
+[node name="Title" type="Label" parent="Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+text = "BOSS LAB"
+[node name="Info" type="Label" parent="Layout"]
+layout_mode = 2
+autowrap_mode = 2
+horizontal_alignment = 1
+text = "Boss encounter tests unlock as each boss is implemented."
+[node name="Boss1" type="Button" parent="Layout"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+disabled = true
+text = "BOSS 1 — LOCKED"
+[node name="Boss2" type="Button" parent="Layout"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+disabled = true
+text = "BOSS 2 — LOCKED"
+[node name="Boss3" type="Button" parent="Layout"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+disabled = true
+text = "BOSS 3 — LOCKED"
+[node name="Back" type="Button" parent="Layout"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "BACK"

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ui/sci_fi_button.gd" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/ui/SettingsPanel.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/ui/Hangar.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/ui/BossLab.tscn" id="5"]
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -53,6 +54,11 @@ custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 text = "HANGAR"
 script = ExtResource("2")
+[node name="BossLab" type="Button" parent="Center/Layout"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+text = "BOSS LAB"
+script = ExtResource("2")
 [node name="Settings" type="Button" parent="Center/Layout"]
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
@@ -76,4 +82,6 @@ visible = false
 [node name="Settings" parent="." instance=ExtResource("3")]
 visible = false
 [node name="Hangar" parent="." instance=ExtResource("4")]
+visible = false
+[node name="BossLab" parent="." instance=ExtResource("5")]
 visible = false
