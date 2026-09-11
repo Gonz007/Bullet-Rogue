@@ -7,6 +7,7 @@ var projectile_damage := 1
 var projectile_speed := 720.0
 
 var _elapsed := 0.0
+var _rocket_elapsed := 0.0
 var _card_manager: CardManager
 
 
@@ -22,6 +23,11 @@ func _process(delta: float) -> void:
 	if _elapsed >= fire_interval and _card_manager != null:
 		_elapsed -= fire_interval
 		_card_manager.spawn_player_projectiles(global_position, [Vector2.UP], projectile_damage, projectile_speed, {"synergy": "strike_drones", "drone_shot": true})
+	if SynergyManager.has_synergy("strike_squadron") and _card_manager != null:
+		_rocket_elapsed += delta
+		if _rocket_elapsed >= 2.2:
+			_rocket_elapsed -= 2.2
+			_card_manager.spawn_player_projectiles(global_position, [Vector2.UP], 3, 420.0, {"rocket": true, "synergy": "strike_squadron", "drone_rocket": true})
 
 
 func _draw() -> void:

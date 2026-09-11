@@ -8,7 +8,9 @@ const CATALOG: Array[SynergyData] = [
 	preload("res://synergies/ricochet_fan.tres"), preload("res://synergies/cluster_bomb.tres"),
 	preload("res://synergies/mirror_fracture.tres"), preload("res://synergies/counter_bomb.tres"),
 	preload("res://synergies/twin_missiles.tres"), preload("res://synergies/warhead.tres"),
-	preload("res://synergies/retaliation_fan.tres"), preload("res://synergies/pinball.tres")
+	preload("res://synergies/retaliation_fan.tres"), preload("res://synergies/pinball.tres"),
+	preload("res://synergies/strike_squadron.tres"), preload("res://synergies/chain_reaction.tres"),
+	preload("res://synergies/mirror_storm.tres")
 ]
 
 var _active_synergies: Array[SynergyData] = []
@@ -56,6 +58,11 @@ func on_combat_event(event_name: String, context: Dictionary, card_manager: Card
 		var reflected := context["projectile"] as Projectile
 		if reflected != null:
 			card_manager.spawn_player_projectiles(reflected.global_position, [reflected.direction.rotated(-0.22), reflected.direction.rotated(0.22)], reflected.damage_info.amount, reflected.speed, {"mirror_fracture": true})
+	if event_name == "projectile_reflected" and has_synergy("mirror_storm"):
+		var storm_projectile := context["projectile"] as Projectile
+		if storm_projectile != null:
+			storm_projectile.bounces_remaining += 2
+			card_manager.spawn_player_projectiles(storm_projectile.global_position, [storm_projectile.direction.rotated(-0.42), storm_projectile.direction.rotated(0.42)], storm_projectile.damage_info.amount, storm_projectile.speed, {"mirror_storm": true})
 	if event_name == "projectile_hit":
 		var impact_projectile := context["projectile"] as Projectile
 		if impact_projectile == null:
@@ -64,3 +71,5 @@ func on_combat_event(event_name: String, context: Dictionary, card_manager: Card
 			CombatEffect.spawn(impact_projectile.get_tree().current_scene, impact_projectile.global_position, Color(0.35, 0.95, 1.0), 58.0)
 		if has_synergy("cluster_bomb") and impact_projectile.metadata.get("split_generation", 0) > 0:
 			card_manager.spawn_player_projectiles(impact_projectile.global_position, [Vector2.UP.rotated(-0.55), Vector2.UP.rotated(0.55)], 1, impact_projectile.speed * 0.75, {"cluster_fragment": true})
+		if has_synergy("chain_reaction") and impact_projectile.metadata.get("cluster_fragment", false):
+			CombatEffect.spawn(impact_projectile.get_tree().current_scene, impact_projectile.global_position, Color(1.0, 0.3, 0.15), 62.0)

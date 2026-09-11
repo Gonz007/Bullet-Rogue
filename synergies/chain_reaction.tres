@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/synergies/synergy_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "chain_reaction"
+display_name = "CHAIN REACTION"
+description = "Cluster fragments create a larger secondary detonation."
+required_card_ids = ["split", "combustion", "pierce"]
+effect_type = "chain_explosion"

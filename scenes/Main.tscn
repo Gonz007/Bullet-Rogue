@@ -69,6 +69,17 @@ theme_override_colors/font_color = Color(0.75, 0.9, 1, 1)
 theme_override_font_sizes/font_size = 22
 text = "Hull: 3 / 3"
 
+[node name="SynergyNotice" type="Label" parent="HUD"]
+visible = false
+offset_left = 40.0
+offset_top = 300.0
+offset_right = 440.0
+offset_bottom = 370.0
+theme_override_colors/font_color = Color(0.3, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+text = "SYNERGY UNLOCKED"
+
 [node name="HelpLabel" type="Label" parent="HUD" unique_id=314635609]
 offset_left = 18.0
 offset_top = 810.0

@@ -29,6 +29,7 @@ func _ready() -> void:
 	card_manager.card_rejected.connect(_on_card_rejected)
 	card_manager.configure(player)
 	drone_formation.configure(player, card_manager)
+	SynergyManager.synergy_unlocked.connect(_on_synergy_unlocked)
 	shop_manager.configure(card_manager)
 	shop_manager.shop_requested.connect(shop_ui.open_shop)
 	shop_ui.configure(card_manager, card_slots_hud)
@@ -101,6 +102,17 @@ func _on_experience_changed(current_experience: int, required_experience: int) -
 	experience_label.text = "XP: %d / %d" % [current_experience, required_experience]
 	experience_bar.max_value = required_experience
 	experience_bar.value = current_experience
+
+
+func _on_synergy_unlocked(synergy: SynergyData) -> void:
+	var notice := $HUD/SynergyNotice
+	notice.text = "SYNERGY UNLOCKED\n%s" % synergy.display_name
+	notice.visible = true
+	notice.modulate.a = 1.0
+	var tween := create_tween()
+	tween.tween_interval(1.5)
+	tween.tween_property(notice, "modulate:a", 0.0, 0.35)
+	tween.tween_callback(func() -> void: notice.visible = false)
 
 
 func _unhandled_input(event: InputEvent) -> void:
