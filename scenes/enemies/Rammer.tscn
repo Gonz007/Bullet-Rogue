@@ -14,5 +14,9 @@ coin_pickup_scene = ExtResource("2")
 [node name="Body" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(0, 31, 24, -15, 0, -30, -24, -15)
 color = Color(1, 0.45, 0.16, 1)
+[node name="Telegraph" type="Line2D" parent="."]
+width = 3.0
+default_color = Color(1, 0.86, 0.22, 0.92)
+antialiased = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1_shape")
