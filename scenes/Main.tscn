@@ -24,6 +24,10 @@
 [ext_resource type="Script" path="res://scripts/shop/shop_manager.gd" id="21_shop_manager"]
 [ext_resource type="PackedScene" path="res://scenes/ui/ShopUI.tscn" id="22_shop_ui"]
 [ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="23_pause"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/FastChaser.tscn" id="24_fast"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/HeavyChaser.tscn" id="25_heavy"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/ZigzagChaser.tscn" id="26_zigzag"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/Rammer.tscn" id="27_rammer"]
 
 [node name="Main" type="Node2D" unique_id=827351479]
 script = ExtResource("1_main")
@@ -47,6 +51,10 @@ chaser_scene = ExtResource("4_chaser")
 shooter_scene = ExtResource("5_shooter")
 burst_scene = ExtResource("6_burst")
 turret_scene = ExtResource("7_turret")
+fast_chaser_scene = ExtResource("24_fast")
+heavy_chaser_scene = ExtResource("25_heavy")
+zigzag_chaser_scene = ExtResource("26_zigzag")
+rammer_scene = ExtResource("27_rammer")
 
 [node name="RunProgress" type="Node" parent="." unique_id=319239813]
 script = ExtResource("8_progress")

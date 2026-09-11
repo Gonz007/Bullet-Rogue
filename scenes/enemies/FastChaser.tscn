@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://scenes/Chaser.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/enemies/fast_chaser.gd" id="2"]
+[node name="FastChaser" instance=ExtResource("1")]
+script = ExtResource("2")
+max_health = 3
+experience_value = 3
+coin_drop_chance = 0.08

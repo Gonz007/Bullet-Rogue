@@ -11,6 +11,9 @@ signal died(enemy: Enemy, damage_info: DamageInfo)
 @export var coin_drop_amount_min := 1
 @export var coin_drop_amount_max := 1
 @export var coin_pickup_scene: PackedScene
+@export_category("Contact")
+@export var contact_damage := 1
+@export var destroys_on_contact := true
 
 var health := 0
 var _is_defeated := false
@@ -19,6 +22,7 @@ var _is_defeated := false
 func _ready() -> void:
 	health = max_health
 	add_to_group("enemies")
+	body_entered.connect(_on_body_entered)
 
 
 func take_damage(damage_info: DamageInfo) -> void:
@@ -56,4 +60,12 @@ func _try_drop_coins() -> void:
 	var coin := coin_pickup_scene.instantiate() as CoinPickup
 	coin.global_position = global_position
 	coin.amount = randi_range(coin_drop_amount_min, max(coin_drop_amount_min, coin_drop_amount_max))
-	get_tree().current_scene.add_child(coin)
+	get_tree().current_scene.call_deferred("add_child", coin)
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if _is_defeated or not body is Player:
+		return
+	body.take_damage(contact_damage)
+	if destroys_on_contact:
+		queue_free()
