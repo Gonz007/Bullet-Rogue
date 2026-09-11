@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/wave_data.gd" id="1_wave"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/Rammer.tscn" id="2_rammer"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/MovingShooter.tscn" id="3_moving"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/Orbiter.tscn" id="4_orbiter"]
+
+[resource]
+script = ExtResource("1_wave")
+display_name = "Pressure"
+enemy_scenes = Array[PackedScene]([ExtResource("2_rammer"), ExtResource("3_moving"), ExtResource("4_orbiter")])
+spawn_count = 5
+spawn_interval = 1.15
+rest_after = 3.0
+elite_chance = 0.15

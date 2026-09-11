@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/wave_data.gd" id="1_wave"]
+[ext_resource type="PackedScene" path="res://scenes/Chaser.tscn" id="2_chaser"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/FastChaser.tscn" id="3_fast"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/ZigzagChaser.tscn" id="4_zigzag"]
+
+[resource]
+script = ExtResource("1_wave")
+display_name = "Pursuit"
+enemy_scenes = Array[PackedScene]([ExtResource("2_chaser"), ExtResource("3_fast"), ExtResource("4_zigzag")])
+spawn_count = 7
+spawn_interval = 0.75
+rest_after = 2.0

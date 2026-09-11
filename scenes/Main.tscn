@@ -2,11 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dgy46pieuptsd" path="res://scripts/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2_player"]
-[ext_resource type="Script" uid="uid://cn4ub7vxb5646" path="res://scripts/enemy_spawner.gd" id="3_spawner"]
-[ext_resource type="PackedScene" path="res://scenes/Chaser.tscn" id="4_chaser"]
-[ext_resource type="PackedScene" path="res://scenes/Shooter.tscn" id="5_shooter"]
-[ext_resource type="PackedScene" path="res://scenes/Burst.tscn" id="6_burst"]
-[ext_resource type="PackedScene" path="res://scenes/Turret.tscn" id="7_turret"]
+[ext_resource type="Script" path="res://scripts/spawn_director.gd" id="3_director"]
+[ext_resource type="Resource" path="res://waves/stage1_pursuit.tres" id="4_pursuit"]
+[ext_resource type="Resource" path="res://waves/stage1_crossfire.tres" id="5_crossfire"]
+[ext_resource type="Resource" path="res://waves/stage1_pressure.tres" id="6_pressure"]
 [ext_resource type="Script" uid="uid://34x1qginllf8" path="res://scripts/run_progress.gd" id="8_progress"]
 [ext_resource type="Script" uid="uid://74m3n16h4vuv" path="res://scripts/cards/card_manager.gd" id="9_cards"]
 [ext_resource type="Script" uid="uid://cjuvsggsg6irn" path="res://scripts/cards/card_data.gd" id="10_1iba3"]
@@ -24,15 +23,6 @@
 [ext_resource type="Script" path="res://scripts/shop/shop_manager.gd" id="21_shop_manager"]
 [ext_resource type="PackedScene" path="res://scenes/ui/ShopUI.tscn" id="22_shop_ui"]
 [ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="23_pause"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/FastChaser.tscn" id="24_fast"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/HeavyChaser.tscn" id="25_heavy"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/ZigzagChaser.tscn" id="26_zigzag"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/Rammer.tscn" id="27_rammer"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/StraightShooter.tscn" id="28_straight"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/SpreadShooter.tscn" id="29_spread"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/PredictiveChaser.tscn" id="30_predictive"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/MovingShooter.tscn" id="31_moving"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/Orbiter.tscn" id="32_orbiter"]
 
 [node name="Main" type="Node2D" unique_id=827351479]
 script = ExtResource("1_main")
@@ -51,20 +41,9 @@ color = Color(0.025, 0.04, 0.1, 1)
 position = Vector2(240, 700)
 
 [node name="EnemySpawner" type="Node" parent="." unique_id=717987066]
-script = ExtResource("3_spawner")
-chaser_scene = ExtResource("4_chaser")
-shooter_scene = ExtResource("5_shooter")
-burst_scene = ExtResource("6_burst")
-turret_scene = ExtResource("7_turret")
-fast_chaser_scene = ExtResource("24_fast")
-heavy_chaser_scene = ExtResource("25_heavy")
-zigzag_chaser_scene = ExtResource("26_zigzag")
-rammer_scene = ExtResource("27_rammer")
-straight_shooter_scene = ExtResource("28_straight")
-spread_shooter_scene = ExtResource("29_spread")
-predictive_chaser_scene = ExtResource("30_predictive")
-moving_shooter_scene = ExtResource("31_moving")
-orbiter_scene = ExtResource("32_orbiter")
+script = ExtResource("3_director")
+waves = Array[Resource]([ExtResource("4_pursuit"), ExtResource("5_crossfire"), ExtResource("6_pressure")])
+max_active_enemies = 7
 
 [node name="RunProgress" type="Node" parent="." unique_id=319239813]
 script = ExtResource("8_progress")
