@@ -31,6 +31,7 @@ func take_damage(damage_info: DamageInfo) -> void:
 	health_updated.emit(maxi(health, 0), max_health)
 	if health <= 0:
 		_is_defeated = true
+		get_tree().call_group("run_stats", "register_kill", self)
 		defeated.emit(self, damage_info)
 		died.emit(self, damage_info)
 		CombatEffect.spawn(get_tree().current_scene, global_position, Color(0.4, 0.95, 1.0), 96.0)
