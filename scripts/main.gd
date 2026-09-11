@@ -47,6 +47,9 @@ func _ready() -> void:
 	_on_player_health_changed(player.health, player.max_health)
 	_on_level_changed(run_progress.level)
 	_on_experience_changed(run_progress.experience, run_progress.experience_required)
+	var test_boss := StageManager.consume_boss_test()
+	if test_boss != null:
+		boss_manager.call_deferred("start_boss", test_boss)
 
 
 func _apply_selected_stage() -> void:

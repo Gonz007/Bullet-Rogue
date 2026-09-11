@@ -7,6 +7,7 @@ const STAGES: Array[StageData] = [
 ]
 
 var selected_stage_id := "stage_1"
+var pending_boss_test: PackedScene
 
 
 func get_stages() -> Array[StageData]:
@@ -25,3 +26,14 @@ func select_stage(stage_id: String) -> bool:
 		return false
 	selected_stage_id = stage_id
 	return true
+
+
+func begin_boss_test(boss_scene: PackedScene, stage_id := "stage_1") -> void:
+	pending_boss_test = boss_scene
+	selected_stage_id = stage_id
+
+
+func consume_boss_test() -> PackedScene:
+	var boss_scene := pending_boss_test
+	pending_boss_test = null
+	return boss_scene
